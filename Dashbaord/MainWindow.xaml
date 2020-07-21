@@ -1,0 +1,198 @@
+﻿<Window x:Class="Dashbaord.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dashbaord"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="800" SizeToContent="Manual" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        <Storyboard x:Key="MenuOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="70"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="215"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+        <Storyboard x:Key="MenuClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="215"></EasingDoubleKeyFrame>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="70"></EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Button.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuOpen}">
+
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="Button.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource MenuClose}">
+
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid>
+        
+        <Grid Height="40" VerticalAlignment="Top" Background="#FF3399FF">
+            <TextBlock HorizontalAlignment="Center" Text="G R A V I T O N" Foreground="White" VerticalAlignment="Center" FontWeight="Light" FontSize="30" ></TextBlock>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Text="Amit Arora" Foreground="White" VerticalAlignment="Center" FontWeight="Light" FontSize="18" ></TextBlock>
+
+                <materialDesign:PopupBox  Margin="5" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="150">
+                        <Button Content="Account"></Button>
+                        <Button Content="Settings"></Button>
+                        <Button Content="Help"></Button>
+                        <Button x:Name="ButtonPopUpLogout" Content="Logout" Click="ButtonPopUpLogout_Click" ></Button>
+                        <Separator></Separator>
+                        <Button x:Name="ButtonPopUpQuit" Content="Quit App" Click="ButtonPopUpQuit_Click" ></Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridMenu" Width="215" HorizontalAlignment="Left" Background="CornflowerBlue"   >
+            <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <Grid Height="150" Background="WhiteSmoke">
+                    <Button x:Name="ButtonCloseMenu" Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Collapsed" Click="ButtonCloseMenu_Click" >
+                        <materialDesign:PackIcon Kind="ArrowLeft" Width="20" Height="20" Foreground="#FF3399FF"></materialDesign:PackIcon>
+                    </Button>
+                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonOpenMenu_Click" >
+                        <materialDesign:PackIcon Kind="Menu" Width="20" Height="20" Foreground="#FF3399FF"></materialDesign:PackIcon>
+                    </Button>
+                </Grid>
+                <!--<ListView Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                    <ListViewItem Height="60"/>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Margin="10" Kind="NotebookMultiple" Width="30" Height="30"></materialDesign:PackIcon>
+                        <TextBlock Text="Ledger" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                    </StackPanel>
+                </ListView>-->
+
+
+                <StackPanel Orientation="Horizontal"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,75,0,0" >
+                    <StackPanel>
+                        <materialDesign:PackIcon Foreground="White" Kind="NotebookMultiple" Width="30" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+                    <Expander  Background="{x:Null}" Header="Ledger             "   VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Light" FontSize="16" Foreground="White" >
+                        <StackPanel Orientation="Vertical">
+                            <ListViewItem Height="60" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Add" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Create" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Show" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Display" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChangeHistory" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Alter" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,75,0,0" >
+                    <StackPanel>
+                        <materialDesign:PackIcon Foreground="White" Kind="PeopleOutline" Width="30" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+                    <Expander  Background="{x:Null}" Header="Groups             " VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Light" FontSize="16" Foreground="White" >
+                        <StackPanel Orientation="Vertical">
+                            <ListViewItem Height="60" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Add" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Create" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Show" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Display" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChangeHistory" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Alter" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,75,0,0" >
+                    <StackPanel>
+                        <materialDesign:PackIcon  Foreground="White" Kind="CeilingLamp" Width="30" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+                    <Expander  Background="{x:Null}" Header="Cost Centers    " VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Light" FontSize="16" Foreground="White" >
+                        <StackPanel Orientation="Vertical">
+                            <ListViewItem Height="60" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Add" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Create" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Show" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Display" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChangeHistory" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Alter" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="10,75,0,0" >
+                    <StackPanel>
+                        <materialDesign:PackIcon Foreground="White" Kind="Category" Width="30" Height="30" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+                    <Expander  Background="{x:Null}" Header="Cost Categories" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Light" FontSize="16" Foreground="White" >
+                        <StackPanel Orientation="Vertical">
+                            <ListViewItem Height="60" Foreground="White">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Add" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Create" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Show" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Display" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                            <ListViewItem Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChangeHistory" Width="15" Height="15" Margin="10" VerticalAlignment="Center"/>
+                                    <TextBlock Text="Alter" VerticalAlignment="Center" Margin="20 10" FontFamily="16" />
+                                </StackPanel>
+                            </ListViewItem>
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                
+            </StackPanel>
+        </Grid>
+
+        
+    </Grid>
+</Window>
