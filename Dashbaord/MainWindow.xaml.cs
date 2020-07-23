@@ -23,6 +23,8 @@ namespace Dashbaord
         public MainWindow()
         {
             InitializeComponent();
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new DisplayObject());
         }
 
         private void ButtonPopUpLogout_Click(object sender, RoutedEventArgs e)
@@ -45,6 +47,19 @@ namespace Dashbaord
             ButtonOpenMenu.Visibility = Visibility.Visible;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
-        
+
+        public void CtrShortcut1(Object sender, ExecutedRoutedEventArgs e)
+        {
+            ButtonPopUpQuit.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+        }
+
+        private void PackIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
+
+            if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                Environment.Exit(0);
+        }
+       
     }
 }
