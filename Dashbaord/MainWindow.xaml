@@ -85,33 +85,38 @@
                         <materialDesign:PackIcon Kind="Menu" Width="20" Height="20" Foreground="#FF3399FF"></materialDesign:PackIcon>
                     </Button>
                 </Grid>
-                <ListView Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
-                    <ListViewItem Height="60"/>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="10" Kind="NotebookMultiple" Width="30" Height="30"></materialDesign:PackIcon>
-                        <TextBlock Text="Ledger" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
-                    </StackPanel>
-                </ListView>
-                <ListView Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListViewItem Height="60"/>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="10" Kind="People" Width="30" Height="30"></materialDesign:PackIcon>
-                        <TextBlock Text="Groups" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
-                    </StackPanel>
-                </ListView>
-                <ListView Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListViewItem Height="60"/>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="10" Kind="Centos" Width="30" Height="30"></materialDesign:PackIcon>
-                        <TextBlock Text="Cost Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
-                    </StackPanel>
-                </ListView>
-                <ListView Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                    <ListViewItem Height="60"/>
-                    <StackPanel Orientation="Horizontal">
-                        <materialDesign:PackIcon Margin="10" Kind="Category" Width="30" Height="30"></materialDesign:PackIcon>
-                        <TextBlock Text="Cost Categories" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
-                    </StackPanel>
+                <ListView Name="ListViewMenu" Foreground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListView_SelectionChanged" SelectedIndex="0">
+                    <!--<ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Setter Property="Margin" Value="0"/>
+                            <Setter Property="Padding" Value="20"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>-->
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="10" Kind="NotebookMultiple" Width="30" Height="30"></materialDesign:PackIcon>
+                            <TextBlock Text="Ledger" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="10" Kind="People" Width="30" Height="30"></materialDesign:PackIcon>
+                            <TextBlock Text="Groups" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="10" Kind="Centos" Width="30" Height="30"></materialDesign:PackIcon>
+                            <TextBlock Text="Cost Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="60">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Margin="10" Kind="Category" Width="30" Height="30"></materialDesign:PackIcon>
+                            <TextBlock Text="Cost Categories" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Light" FontSize="18" Margin="10,0,0,0"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
                 </ListView>
             </StackPanel>
         </Grid>

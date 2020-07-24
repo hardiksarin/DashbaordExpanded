@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GravitonLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,9 +23,8 @@ namespace Dashbaord
     {
         public MainWindow()
         {
+            GlobalConfig.InitializeConnections();
             InitializeComponent();
-            GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new DisplayObject());
         }
 
         private void ButtonPopUpLogout_Click(object sender, RoutedEventArgs e)
@@ -55,11 +55,35 @@ namespace Dashbaord
 
         private void PackIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
-
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 Environment.Exit(0);
         }
-       
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = ListViewMenu.SelectedIndex;
+
+            switch (index)
+            {
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(0));
+                    break;
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(1));
+                    break;
+                case 2:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(2));
+                    break;
+                case 3:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(3));
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
