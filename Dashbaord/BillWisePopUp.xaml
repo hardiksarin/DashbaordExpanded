@@ -1,0 +1,23 @@
+﻿<Window x:Class="Dashbaord.BillWisePopUp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Dashbaord"
+        mc:Ignorable="d"
+        Title="BillWisePopUp" Height="400" Width="400" WindowStartupLocation="CenterOwner" WindowStyle="None">
+    <Grid>
+        <DataGrid Margin="20" Name = "dataGrid" AlternatingRowBackground = "White" Background="#3399ff"  
+             AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" Foreground="White">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn  Header = " Refernce"  Width="*" />
+                <DataGridTextColumn Header = "Due Date" Width="*" />
+                <DataGridCheckBoxColumn Header = "Amount" Width="*" />
+                <DataGridComboBoxColumn Header = "EMI No." Width="*" ></DataGridComboBoxColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+</Window>
