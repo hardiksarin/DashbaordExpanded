@@ -64,7 +64,7 @@
                 <TextBlock Text="Amit Arora" Foreground="White" VerticalAlignment="Center" FontWeight="Light" FontSize="18" ></TextBlock>
                 <materialDesign:PopupBox Margin="5" Foreground="LightGoldenrodYellow" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" >
                     <DockPanel Margin="0,0,0,-10" Width="740" Height="auto" Background="#FF3399FF" >
-                        <Button Foreground="White" Content="Payment Voucher"></Button>
+                        <Button x:Name="PaymentVoucherCreate" Foreground="White" Content="Payment Voucher" Click="PaymentVoucherCreate_Click"></Button>
                         <Button  Foreground="White" Content="Receipt Voucher"></Button>
                         <Button  Foreground="White" Content="Contra Voucher"></Button>
                         <Button  Foreground="White" Content="Journal Voucher"></Button>

@@ -85,5 +85,12 @@ namespace Dashbaord
                     break;
             }
         }
+
+
+        private void PaymentVoucherCreate_Click(object sender, RoutedEventArgs e)
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new PaymentVoucher());
+        }
     }
 }
