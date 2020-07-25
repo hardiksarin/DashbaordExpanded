@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="BillWisePopUp" Height="400" Width="400" WindowStartupLocation="CenterOwner" WindowStyle="None">
     <Grid>
-        <DataGrid Margin="20" Name = "dataGrid" AlternatingRowBackground = "White" Background="#3399ff"  
+        <DataGrid Margin="20" Name = "dataGrid" AlternatingRowBackground = "#3399ff" Background="White"  
              AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" Foreground="White">
 
             <DataGrid.Columns>
