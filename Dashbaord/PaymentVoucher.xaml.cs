@@ -23,6 +23,8 @@ namespace Dashbaord
     public partial class PaymentVoucher : UserControl
     {
         private List<LedgerModel> availableLedgers = new List<LedgerModel>();
+        private List<BillModel> availableBills = new List<BillModel>();
+        private List<PaymentBill> paymentBills = new List<PaymentBill>();
         int AccountId = 0;
         int ParticularId = 0;
         public PaymentVoucher()
@@ -78,6 +80,7 @@ namespace Dashbaord
             if (ValidateForm())
             {
                 BillwiseDataGrid.Items.Clear();
+                paymentBills.Clear();
 
                 int amount = int.Parse(AmountTextbox.Text);
                 //DateTime? n = StartDatePicker.SelectedDate;
@@ -87,10 +90,11 @@ namespace Dashbaord
                 {
                     PaymentBill p = new PaymentBill();
                     p.reference = "New";
-                    p.emi = $"E0{i+1}";
+                    p.emi = $"E0{i + 1}";
                     p.due_date = i == 0 ? date : NextMonth(date);
-                    p.amount = $"{(double)amount/num}";
+                    p.amount = $"{(double)amount / num}";
                     date = p.due_date;
+                    paymentBills.Add(p);
 
                     BillwiseDataGrid.Items.Add(p);
                 }
@@ -154,14 +158,52 @@ namespace Dashbaord
         {
             if (e.Key == Key.Return)
             {
-                VoucherModel voucherModel = new VoucherModel();
-                ParticularModel particularModel = new ParticularModel();
+                if (MessageBox.Show("Do you  want to save?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    WireUpDatabase();
+                }
+            }
+        }
 
-                voucherModel.v_date = DatePicker.SelectedDate.ToString().Split(' ').First();
-                voucherModel.v_number = 1;
-                voucherModel.vtype = "Payment";
-                voucherModel.account = 
-                //MessageBox.Show("Hello");
+        private void WireUpDatabase()
+        {
+            VoucherModel voucherModel = new VoucherModel();
+            ParticularModel particularModel = new ParticularModel();
+
+            //Voucher Model
+            string d = DatePicker.SelectedDate.ToString().Split(' ').First();
+            string[] dateList = d.Split('-');
+            voucherModel.v_date = $"{dateList[2]}-{dateList[1]}-{dateList[0]}";
+            voucherModel.v_number = 1;
+            voucherModel.vtype = "Payment";
+            voucherModel.account = AccountId;
+
+            //Particular Model
+            particularModel.particular_amount = double.Parse(AmountTextbox.Text);
+            particularModel.particular_name = ParticularId;
+
+            voucherModel.Particular = particularModel;
+            //Create Voucher And Particular Model.
+            voucherModel = GlobalConfig.Connection.CreateVoucher(voucherModel);
+
+            //Bills
+            foreach (PaymentBill bill in paymentBills)
+            {
+                BillModel billModel = new BillModel();
+                billModel.bill_name = bill.emi;
+                billModel.bill_due_date = bill.due_date;
+                billModel.bill_amount = double.Parse(bill.amount);
+                billModel.lid = ParticularId;
+                billModel.pid = voucherModel.Particular.pid;
+                billModel.bill_done = false;
+                billModel.vid = voucherModel.vid;
+
+                availableBills.Add(billModel);
+            }
+
+            foreach (BillModel bill in availableBills)
+            {
+                GlobalConfig.Connection.CreateBill(bill);
             }
         }
     }
