@@ -92,5 +92,11 @@ namespace Dashbaord
             GridPrincipal.Children.Clear();
             GridPrincipal.Children.Add(new PaymentVoucher());
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new ReceiptVoucher());
+        }
     }
 }

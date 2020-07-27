@@ -26,7 +26,7 @@
 
             </Grid.RowDefinitions>
             <Label  Grid.Row="0" Grid.Column="0"  HorizontalAlignment="left" VerticalAlignment="Center" Name="PaymentVoucherCreationLabel" Content="Payment Voucher" Foreground="OrangeRed" FontSize="28" FontWeight="Light"></Label>
-            <Label  Margin="220,0,0,0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="left" VerticalAlignment="Center" Name="PaymentVoucherNumberLabel" Content="No. 1" Foreground="OrangeRed" FontSize="28" FontWeight="Light"></Label>
+            <TextBlock  Margin="220,0,0,0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="left" VerticalAlignment="Center" Name="PaymentVoucherNumberLabel" Text="No. 1" Foreground="OrangeRed" FontSize="28" FontWeight="Light"></TextBlock>
             <DatePicker Margin="10" IsTodayHighlighted="True" DisplayDate="10-12-2020" Grid.Row="0" Grid.Column="0" Width="110"  HorizontalAlignment="Right"  Name="DatePicker" Foreground="LightGray" FontSize="18" FontWeight="Light"></DatePicker>
             <Label  Grid.Row="1" Grid.Column="0" Margin="0,20,0,0"  HorizontalAlignment="Left"  Name="AccountLabel" Content="Account : " Foreground="#FF3399FF" FontSize="24" FontWeight="Light"></Label>
             <ComboBox  Margin="120,0,0,10" Width="250" x:Name="AccountLedgerCombobox" Foreground="#3399ff" Grid.Row="1" Grid.Column="0"  BorderBrush="LightGray"  Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" SelectionChanged="AccountLedgerCombobox_SelectionChanged"></ComboBox>

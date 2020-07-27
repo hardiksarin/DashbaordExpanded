@@ -25,26 +25,29 @@ namespace Dashbaord
         private List<LedgerModel> availableLedgers = new List<LedgerModel>();
         private List<BillModel> availableBills = new List<BillModel>();
         private List<PaymentBill> paymentBills = new List<PaymentBill>();
+        private List<VoucherModel> vouchers = new List<VoucherModel>();
         int AccountId = 0;
         int ParticularId = 0;
         public PaymentVoucher()
         {
             InitializeComponent();
             LoadListData();
+            WireUpVoucherForm();
             WireUpLists();
         }
 
-        class PaymentBill
+        /*class PaymentBill
         {
             public string reference { get; set; }
             public string emi { get; set; }
             public string due_date { get; set; }
             public string amount { get; set; }
-        }
+        }*/
 
         private void LoadListData()
         {
             availableLedgers = GlobalConfig.Connection.GetLedger_All();
+            vouchers = GlobalConfig.Connection.GetVoucher_All();
         }
 
         private void WireUpLists()
@@ -58,6 +61,12 @@ namespace Dashbaord
 
             ParticularLedgerCombobox.ItemsSource = availableLedgers;
             ParticularLedgerCombobox.DisplayMemberPath = "ledger_name";
+        }
+
+        private void WireUpVoucherForm()
+        {
+            int length = vouchers.Count;
+            PaymentVoucherNumberLabel.Text = $"No. {vouchers[length -1].vid + 1 }";
         }
 
         private void AccountLedgerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -174,7 +183,7 @@ namespace Dashbaord
             string d = DatePicker.SelectedDate.ToString().Split(' ').First();
             string[] dateList = d.Split('-');
             voucherModel.v_date = $"{dateList[2]}-{dateList[1]}-{dateList[0]}";
-            voucherModel.v_number = 1;
+            voucherModel.v_number = vouchers[vouchers.Count - 1].vid + 1; 
             voucherModel.vtype = "Payment";
             voucherModel.account = AccountId;
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GravitonLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -17,9 +18,17 @@ namespace Dashbaord
     /// </summary>
     public partial class BillWisePopUp : Window
     {
-        public BillWisePopUp()
+        //private List<PaymentBill> paymentBills = new List<PaymentBill>();
+        public BillWisePopUp(List<PaymentBill> bill)
         {
+            //paymentBills = bill;
             InitializeComponent();
+            BillwiseDataGrid.Items.Clear();
+            foreach (PaymentBill b in bill)
+            {
+                BillwiseDataGrid.Items.Add(b);
+            }
         }
+
     }
 }

@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="BillWisePopUp" Height="400" Width="400" WindowStartupLocation="CenterOwner" WindowStyle="None">
     <Grid>
-        <DataGrid Margin="20" Name = "dataGrid" AlternatingRowBackground = "#3399ff" Background="White"  
-             AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" Foreground="White">
+        <DataGrid Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "#3399ff" Background="White"  
+             AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" Foreground="White" IsReadOnly="True">
 
             <DataGrid.Columns>
-                <DataGridTextColumn  Header = " Refernce"  Width="*" />
-                <DataGridTextColumn Header = "Due Date" Width="*" />
-                <DataGridCheckBoxColumn Header = "Amount" Width="*" />
-                <DataGridComboBoxColumn Header = "EMI No." Width="*" ></DataGridComboBoxColumn>
+                <DataGridTextColumn  Header = " Refernce"  Width="*" Binding="{Binding reference}"/>
+                <DataGridTextColumn Header = "Due Date" Width="*" Binding="{Binding emi}"/>
+                <DataGridTextColumn Header = "Amount" Width="*" Binding="{Binding due_date}"/>
+                <DataGridTextColumn Header = "EMI No." Width="*" Binding="{Binding amount}"></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
