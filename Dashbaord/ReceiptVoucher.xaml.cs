@@ -19,12 +19,14 @@ namespace Dashbaord
     /// <summary>
     /// Interaction logic for ReceiptVoucher.xaml
     /// </summary>
-    public partial class ReceiptVoucher : UserControl
+    public partial class ReceiptVoucher : UserControl,IBillRequestor
     {
         private List<LedgerModel> availableLedgers = new List<LedgerModel>();
         private List<BillModel> availableBills = new List<BillModel>();
         private List<PaymentBill> paymentBills = new List<PaymentBill>();
         private List<VoucherModel> vouchers = new List<VoucherModel>();
+        private List<PaymentBill> recieptBills = new List<PaymentBill>();
+        PaymentBill currentBill = new PaymentBill();
         int AccountId = 0;
         int ParticularId = 0;
         public ReceiptVoucher()
@@ -38,7 +40,7 @@ namespace Dashbaord
         private void LoadListData()
         {
             availableLedgers = GlobalConfig.Connection.GetLedger_All();
-            vouchers = GlobalConfig.Connection.GetVoucher_All();
+            vouchers = GlobalConfig.Connection.GetVoucher_Reciept();
         }
 
         private void WireUpLists()
@@ -56,8 +58,15 @@ namespace Dashbaord
 
         private void WireUpVoucherForm()
         {
-            int length = vouchers.Count;
-            RecieptVoucherNumberLabel.Text = $"No. {vouchers[length - 1].vid + 1 }";
+            if (vouchers != null)
+            {
+                int length = vouchers.Count;
+                RecieptVoucherNumberLabel.Text = $"No. {length + 1 }";
+            }
+            else
+            {
+                RecieptVoucherNumberLabel.Text = "No. 1";
+            }
         }
 
         private void AccountLedgerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -90,9 +99,78 @@ namespace Dashbaord
         {
             if (e.Key == Key.Return)
             {
-                BillWisePopUp form = new BillWisePopUp(paymentBills);
-                form.Show();
+                double amount = double.Parse(AmountTextbox.Text);
+                if (ValidateForm() && amount != 0)
+                {
+                    recieptBills = paymentBills;
+                    BillWisePopUp form = new BillWisePopUp(this, recieptBills);
+                    form.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Please Fill in the Details Properly!");
+                }
             }
+        }
+
+        public void BillComplete(PaymentBill model)
+        {
+            double amount = double.Parse(AmountTextbox.Text);
+            double billAmount = double.Parse(model.amount);
+            if (amount < billAmount)
+            {
+                //model.amount = amount.ToString();
+                //currentBill = model;
+                currentBill.emi = model.emi;
+                currentBill.due_date = model.due_date;
+                currentBill.reference = model.reference;
+                currentBill.amount = amount.ToString();
+                BillwiseDataGrid.Items.Add(currentBill);
+                model.amount = (billAmount - amount).ToString();
+                AmountTextbox.Text = "0";
+            }
+            else if(amount == billAmount)
+            {
+                currentBill = model;
+                BillwiseDataGrid.Items.Add(currentBill);
+                paymentBills.Remove(model);
+                AmountTextbox.Text = (amount - billAmount).ToString();
+            }
+            else if(amount > billAmount)
+            {
+                currentBill = model;
+                BillwiseDataGrid.Items.Add(currentBill);
+                paymentBills.Remove(model);
+                AmountTextbox.Text = (amount - billAmount).ToString();
+            }
+            
+        }
+
+        private bool ValidateForm()
+        {
+            bool output = true;
+
+            if(AccountLedgerCombobox.SelectedItem == null)
+            {
+                output = false;
+            }
+
+            if (ParticularLedgerCombobox.SelectedItem == null)
+            {
+                output = false;
+            }
+
+            if(DatePicker.SelectedDate == null)
+            {
+                output = false;
+            }
+            return output;
+        }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BillWisePopUp form = new BillWisePopUp(this, paymentBills);
+            form.Show();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GravitonLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,16 +20,25 @@ namespace Dashbaord
     public partial class BillWisePopUp : Window
     {
         //private List<PaymentBill> paymentBills = new List<PaymentBill>();
-        public BillWisePopUp(List<PaymentBill> bill)
+        IBillRequestor callingForm;
+        public BillWisePopUp(IBillRequestor caller,List<PaymentBill> bill)
         {
             //paymentBills = bill;
             InitializeComponent();
+            callingForm = caller;
             BillwiseDataGrid.Items.Clear();
             foreach (PaymentBill b in bill)
             {
                 BillwiseDataGrid.Items.Add(b);
             }
+
         }
 
+        private void BillwiseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PaymentBill p = (PaymentBill)BillwiseDataGrid.SelectedItem;
+            callingForm.BillComplete(p);
+            this.Close();
+        }
     }
 }

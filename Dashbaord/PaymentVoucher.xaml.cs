@@ -36,18 +36,11 @@ namespace Dashbaord
             WireUpLists();
         }
 
-        /*class PaymentBill
-        {
-            public string reference { get; set; }
-            public string emi { get; set; }
-            public string due_date { get; set; }
-            public string amount { get; set; }
-        }*/
 
         private void LoadListData()
         {
             availableLedgers = GlobalConfig.Connection.GetLedger_All();
-            vouchers = GlobalConfig.Connection.GetVoucher_All();
+            vouchers = GlobalConfig.Connection.GetVoucher_Payment();
         }
 
         private void WireUpLists()
@@ -65,8 +58,15 @@ namespace Dashbaord
 
         private void WireUpVoucherForm()
         {
-            int length = vouchers.Count;
-            PaymentVoucherNumberLabel.Text = $"No. {vouchers[length -1].vid + 1 }";
+            if (vouchers != null)
+            {
+                int length = vouchers.Count;
+                PaymentVoucherNumberLabel.Text = $"No. {length + 1}";
+            }
+            else
+            {
+                PaymentVoucherNumberLabel.Text = "No. 1";
+            }
         }
 
         private void AccountLedgerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
