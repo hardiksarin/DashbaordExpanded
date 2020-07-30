@@ -32,25 +32,6 @@ namespace Dashbaord
             index = id;
             LoadListData();
             WireUpLists();
-            //listcollection.Clear();
-            //ListBoxItems.Items.Add("Hey");
-            //ListBoxItems.Items.Add("hola");
-            //ListBoxItems.Items.Add("Namaste");
-            //ListBoxItems.Items.Add("123");
-            //ListBoxItems.Items.Add("1");
-            //ListBoxItems.Items.Add("234");
-            //ListBoxItems.Items.Add("a1v2");
-            //ListBoxItems.Items.Add("Luke Skywalker");
-            //ListBoxItems.Items.Add("Thanos");
-            //ListBoxItems.Items.Add("Tony Stark");
-            //ListBoxItems.Items.Add("Peter North");
-            //ListBoxItems.Items.Add("Bazinga");
-            /*foreach (string n in ListBoxItems.Items)
-            {
-                
-                listcollection.Add(n.ToString());
-                SearchInputTextBox.CharacterCasing = CharacterCasing.Normal;
-            }*/
             SearchInputTextBox.CharacterCasing = CharacterCasing.Normal;
         }
 
@@ -79,25 +60,25 @@ namespace Dashbaord
         {
             switch (index)
             {
-                case 0:
+                case 0:                                                 //Ledger
                     ListBoxItems.ItemsSource = null;
 
                     ListBoxItems.ItemsSource = availableLedgers;
                     ListBoxItems.DisplayMemberPath = "ledger_name";
                     break;
-                case 1:
+                case 1:                                                 //Groups
                     ListBoxItems.ItemsSource = null;
 
                     ListBoxItems.ItemsSource = availableGroups;
                     ListBoxItems.DisplayMemberPath = "group_name";
                     break;
-                case 2:
+                case 2:                                                 //Cost Center
                     ListBoxItems.ItemsSource = null;
 
                     ListBoxItems.ItemsSource = availableCostCenters;
                     ListBoxItems.DisplayMemberPath = "cc_name";
                     break;
-                case 3:
+                case 3:                                                 //Cost Category
                     ListBoxItems.ItemsSource = null;
 
                     ListBoxItems.ItemsSource = availableCategory;
@@ -216,7 +197,26 @@ namespace Dashbaord
 
         private void ListBoxItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            switch (index)
+            {
+                case 0:
+                    LedgerModel model = (LedgerModel)ListBoxItems.SelectedItem;
+                    MainWindow window = new MainWindow();
+                    window.GridPrincipal.Children.Clear();
+                    window.GridPrincipal.Children.Add(new DisplayLedgers(model));
+                    break;
+                case 1:
 
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GravitonLibrary.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -18,7 +19,7 @@ namespace Dashbaord
     /// </summary>
     public partial class DisplayLedgers : UserControl
     {
-        public DisplayLedgers()
+        public DisplayLedgers(LedgerModel model)
         {
             InitializeComponent();
         }
