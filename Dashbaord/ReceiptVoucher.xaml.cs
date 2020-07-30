@@ -2,6 +2,7 @@
 using GravitonLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -27,6 +28,8 @@ namespace Dashbaord
         private List<VoucherModel> vouchers = new List<VoucherModel>();
         private List<PaymentBill> recieptBills = new List<PaymentBill>();
         PaymentBill currentBill = new PaymentBill();
+        private List<PaymentBill> transactionBill = new List<PaymentBill>();
+        private List<TransactionModel> newTransactions = new List<TransactionModel>();
         int AccountId = 0;
         int ParticularId = 0;
         public ReceiptVoucher()
@@ -78,6 +81,7 @@ namespace Dashbaord
 
         private void ParticularLedgerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            paymentBills.Clear();
             LedgerModel model = (LedgerModel)ParticularLedgerCombobox.SelectedItem;
             ParticularCurrentBalanceDataValue.Text = model.ledger_opening_balance.ToString();
             ParticularId = model.lid;
@@ -126,6 +130,7 @@ namespace Dashbaord
                 currentBill.reference = model.reference;
                 currentBill.amount = amount.ToString();
                 BillwiseDataGrid.Items.Add(currentBill);
+                transactionBill.Add(currentBill);
                 model.amount = (billAmount - amount).ToString();
                 AmountTextbox.Text = "0";
             }
@@ -133,6 +138,7 @@ namespace Dashbaord
             {
                 currentBill = model;
                 BillwiseDataGrid.Items.Add(currentBill);
+                transactionBill.Add(currentBill);
                 paymentBills.Remove(model);
                 AmountTextbox.Text = (amount - billAmount).ToString();
             }
@@ -140,6 +146,7 @@ namespace Dashbaord
             {
                 currentBill = model;
                 BillwiseDataGrid.Items.Add(currentBill);
+                transactionBill.Add(currentBill);
                 paymentBills.Remove(model);
                 AmountTextbox.Text = (amount - billAmount).ToString();
             }
@@ -169,8 +176,42 @@ namespace Dashbaord
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+
             BillWisePopUp form = new BillWisePopUp(this, paymentBills);
             form.Show();
+        }
+
+        private void DataGridRow_KeyUp(object sender, KeyEventArgs e)
+        {
+            newTransactions.Clear();
+            foreach (BillModel bill in availableBills)
+            {
+                foreach (PaymentBill b in transactionBill)
+                {
+                    if (b.emi == bill.bill_name)
+                    {
+                        TransactionModel transactionModel = new TransactionModel();
+                        transactionModel.transaction_date = b.due_date;
+                        transactionModel.transaction_amount = double.Parse(b.amount);
+                        transactionModel.bill_id = bill.bill_id;
+                        newTransactions.Add(transactionModel);
+                        bill.bill_done = true;
+                    }
+                } 
+            }
+
+            foreach (TransactionModel model in newTransactions)
+            {
+                GlobalConfig.Connection.CreateTransaction(model);
+                foreach (BillModel bill in availableBills)
+                {
+                    if(bill.bill_id == model.bill_id)
+                    {
+                        GlobalConfig.Connection.UpdateBill(bill); 
+                    }
+                }
+            }
+            MessageBox.Show("Done");
         }
     }
 }
