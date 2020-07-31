@@ -220,5 +220,10 @@ namespace Dashbaord
                 GlobalConfig.Connection.CreateBill(bill);
             }
         }
+
+        private void BillwiseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

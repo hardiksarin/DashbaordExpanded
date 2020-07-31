@@ -34,7 +34,7 @@
         <CheckBox  Margin="300,55,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="center"  Name="NonRevenueItemCheckBox"></CheckBox>
 
 
-        <Button Margin="0,100,500,0" Width="200" Height="60"   x:Name="CreateButton" Grid.Column="0" Grid.Row="5" Content="Create" BorderBrush="Transparent" Background="#03a9f4"  Foreground="#ffffff" FontSize="30" FontWeight="Light" Click="CreateButton_Click" ></Button>
+        <Button Margin="0,100,500,0" Width="200" Height="60"   x:Name="UpdateButton" Grid.Column="0" Grid.Row="5" Content="Update" BorderBrush="Transparent" Background="#03a9f4"  Foreground="#ffffff" FontSize="30" FontWeight="Light" Click="CreateButton_Click" ></Button>
         <Button Margin="500,100,0,0" Width="200"  Height="60"  x:Name="QuitButton" Grid.Column="0" Grid.Row="5" Content="Quit" BorderBrush="LightGray" Background="LightGray"  Foreground="#ffffff" FontSize="30" FontWeight="Light" Click="QuitButton_Click"></Button>
 
     </Grid>

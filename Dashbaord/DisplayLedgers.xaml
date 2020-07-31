@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Dashbaord"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+
              mc:Ignorable="d" 
                    d:DesignHeight="760" d:DesignWidth="740">
     <Grid>
@@ -67,8 +69,8 @@
 
 
         </GroupBox>
-        <TextBlock Grid.Row="4" Grid.Column="4" Grid.RowSpan="5" Text="1,00,509 Dr" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40"></TextBlock>
-        <TextBlock Grid.Row="4" Margin="0,60,0,0"  Grid.Column="4" Grid.RowSpan="5" Text="1,00,509 Cr" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40"></TextBlock>
+        <TextBox Grid.Row="4" Grid.Column="4" Grid.RowSpan="5" Text="1,00,509" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBox>
+        <ComboBox Width="50" Grid.Row="4" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,33,0" Grid.RowSpan="2"></ComboBox>
         <GroupBox x:Name="LedgerOptions" Grid.Row="8" Grid.RowSpan="11"   Grid.Column="2"  Grid.ColumnSpan="5"  Header="Ledger Options"  Foreground="#FF3399FF"  Margin="10,10,0,0">
 
 
