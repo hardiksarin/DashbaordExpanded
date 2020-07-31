@@ -15,8 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// TODO: Cr/Dr Toggle Adjecnt to Amount
-// TODO: Placemnet to Submit/Create the voucher
+
 namespace Dashbaord
 {
     /// <summary>

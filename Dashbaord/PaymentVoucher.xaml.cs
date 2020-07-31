@@ -15,8 +15,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// TODO: Cr/Dr Toggle Adjecnt to Amount
-// TODO: Placemnet to Submit/Create the voucher
 namespace Dashbaord
 {
     /// <summary>
@@ -216,6 +214,11 @@ namespace Dashbaord
             {
                 GlobalConfig.Connection.CreateBill(bill);
             }
+        }
+
+        private void BillwiseDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

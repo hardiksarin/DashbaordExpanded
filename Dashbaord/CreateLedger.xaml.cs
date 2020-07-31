@@ -13,9 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-// TODO: Remove Second Balance CreateLedger.Xaml
-// TODO: Convert the first Balance to Editable Text Field CreateLedger.Xaml
-// TODO: Add ComboBox/Toggle For Dr/Cr Adjectent to the Balance CreateLedger.Xaml
 namespace Dashbaord
 {
     /// <summary>

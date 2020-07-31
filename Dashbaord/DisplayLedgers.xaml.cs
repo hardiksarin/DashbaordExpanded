@@ -13,11 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
-// TODO: Remove Second Balance 
-// TODO: Convert the first Balance to Editable Text Field 
-// TODO: Add ComboBox/Toggle For Dr/Cr Adjectent to the Balance 
-// TODO: Chnage Button to Update From Create 
 namespace Dashbaord
 {
     /// <summary>
