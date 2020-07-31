@@ -80,7 +80,7 @@ namespace Dashbaord
                 {
                     model.revenue = false;
                 }
-                GlobalConfig.Connection.CreateCategory(model);
+                GlobalConfig.Connection.UpdateCategory(model);
             }
             else
             {

@@ -108,7 +108,7 @@ namespace Dashbaord
                 model.under_category = selectedCategory.category_id;
                 model.under_cc = selectedModel.cost_center_id;
 
-                GlobalConfig.Connection.CreateCostCenter(model);
+                GlobalConfig.Connection.UpdateCostCenter(model);
             }
             else
             {

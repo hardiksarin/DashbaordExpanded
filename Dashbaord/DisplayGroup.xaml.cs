@@ -89,7 +89,7 @@ namespace Dashbaord
                 model.group_alias = AliasInputTetxBox.Text;
                 model.under_group = selectedGroup.group_id;
 
-                GlobalConfig.Connection.CreateGroup(model);
+                GlobalConfig.Connection.UpdateGroups(model);
             }
             else
             {

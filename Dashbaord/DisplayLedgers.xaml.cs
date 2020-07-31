@@ -65,7 +65,10 @@ namespace Dashbaord
                     UnderGroupDropDown.Text = grp.group_name;
                 }
             }
-            StateValue.Text = ledger.mailingModel.md_state;
+            if(ledger.mailingModel.md_state != null)
+            {
+                StateValue.Text = ledger.mailingModel.md_state;
+            }
             MDNameValue.Text = ledger.mailingModel.md_name;
             MDCityValue.Text = ledger.mailingModel.md_city;
             MDAddressValue.Text = ledger.mailingModel.md_address;
@@ -153,7 +156,7 @@ namespace Dashbaord
                 mailingModel.md_pincode = MDPincodeValue.Text;
 
                 model.mailingModel = mailingModel;
-                GlobalConfig.Connection.CreateLedger(model);
+                GlobalConfig.Connection.UpdateLedger(model);
             }
             else
             {
