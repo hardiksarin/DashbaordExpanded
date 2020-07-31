@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Dashbaord.DisplayCostCenter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Dashbaord"
+             mc:Ignorable="d" 
+             d:DesignHeight="760" d:DesignWidth="740">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+
+            <RowDefinition Height="20"/>
+
+        </Grid.RowDefinitions>
+        <Label Margin="10" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Center"  Name="CostCenterCreationLabel" Content="Cost Center Creation" Foreground="Gray" FontSize="34" FontWeight="Light"></Label>
+        <Label Margin="0,40,450,0" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center"  Name="CategoryLabel" Content="Category" Foreground="Gray" FontSize="20" FontWeight="Light"></Label>
+        <ComboBox Margin="0,10,0,0" Width="300" Grid.Row="1"  Grid.Column="0" x:Name="CategoryInputComboBox" MinHeight="30"   Foreground="Gray" FontSize="25" FontWeight="Light"></ComboBox>
+        <Label Margin="0,40,480,0" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center"  Name="NameLabel" Content="Name" Foreground="Gray" FontSize="20" FontWeight="Light"></Label>
+        <TextBox  Margin="0,10,0,0" Height="40" Width="300"  Grid.Column="0" Grid.Row="2" Name="NameInputTextBox"  FontSize="25" VerticalAlignment="Bottom"></TextBox>
+        <Label Margin="0,40,490,0" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Center"  Name="AliasLabel" Content="Alias" Foreground="Gray" FontSize="20" FontWeight="Light"></Label>
+        <TextBox Margin="0,30,0,0" Width="300"  Grid.Column="0" Grid.Row="3" x:Name="AliasInputTetxBox" MinHeight="30"   Foreground="Gray" FontSize="25" FontWeight="Light"></TextBox>
+        <Label Margin="0,60,480,-10" Grid.Row="4" Grid.Column="0" HorizontalAlignment="center"  Name="UnderComboBoxLabel" Content="Under" Foreground="Gray" FontSize="20" FontWeight="Light"></Label>
+        <ComboBox  Margin="0,10,0,0" Width="300" Grid.Row="4" VerticalAlignment="Bottom" Grid.Column="0" x:Name="UnderComboBox" MinHeight="30"   Foreground="Gray" FontSize="25" FontWeight="Light"></ComboBox>
+
+        <Button Margin="0,100,500,0" Width="200" Height="50"   x:Name="CreateButton" Grid.Column="0" Grid.Row="5" Content="Create" BorderBrush="Transparent" Background="#03a9f4"  Foreground="#ffffff" FontSize="30" FontWeight="Light" Click="CreateButton_Click" ></Button>
+        <Button Margin="500,100,0,0" Width="200"  Height="50"  x:Name="QuitButton" Grid.Column="0" Grid.Row="5" Content="Quit" BorderBrush="LightGray" Background="LightGray"  Foreground="#ffffff" FontSize="30" FontWeight="Light" Click="QuitButton_Click"></Button>
+
+
+    </Grid>
+</UserControl>

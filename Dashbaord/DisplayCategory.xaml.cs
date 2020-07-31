@@ -25,6 +25,7 @@ namespace Dashbaord
         {
             InitializeComponent();
             model = costCategoryModel;
+            WireUpForm();
         }
 
         // Validate the login Form

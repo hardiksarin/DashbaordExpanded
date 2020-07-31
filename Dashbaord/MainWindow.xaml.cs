@@ -114,12 +114,14 @@ namespace Dashbaord
 
         public void GroupClicked(GroupModel model)
         {
-            throw new NotImplementedException();
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new DisplayGroup(model));
         }
 
         public void CostCenterClicked(CostCenterModel model)
         {
-            throw new NotImplementedException();
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new DisplayCostCenter(model));
         }
     }
 }
