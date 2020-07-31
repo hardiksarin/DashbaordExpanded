@@ -32,6 +32,7 @@ namespace Dashbaord
         private List<TransactionModel> newTransactions = new List<TransactionModel>();
         int AccountId = 0;
         int ParticularId = 0;
+        int count = 0;
         public ReceiptVoucher()
         {
             InitializeComponent();
@@ -177,8 +178,12 @@ namespace Dashbaord
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
 
-            BillWisePopUp form = new BillWisePopUp(this, paymentBills);
-            form.Show();
+            if (count < 2)
+            {
+                count++;
+                BillWisePopUp form = new BillWisePopUp(this, paymentBills);
+                form.Show(); 
+            }
         }
 
         private void DataGridRow_KeyUp(object sender, KeyEventArgs e)

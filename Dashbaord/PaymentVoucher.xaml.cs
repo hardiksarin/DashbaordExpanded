@@ -26,6 +26,7 @@ namespace Dashbaord
         private List<BillModel> availableBills = new List<BillModel>();
         private List<PaymentBill> paymentBills = new List<PaymentBill>();
         private List<VoucherModel> vouchers = new List<VoucherModel>();
+        int count = 0;
         int AccountId = 0;
         int ParticularId = 0;
         public PaymentVoucher()
@@ -167,9 +168,13 @@ namespace Dashbaord
         {
             if (e.Key == Key.Return)
             {
-                if (MessageBox.Show("Do you  want to save?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (count < 2)
                 {
-                    WireUpDatabase();
+                    if (MessageBox.Show("Do you  want to save ?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        WireUpDatabase();
+                    }
+                    count++;
                 }
             }
         }

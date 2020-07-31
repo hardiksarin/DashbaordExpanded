@@ -32,7 +32,7 @@ namespace Dashbaord
             WireUpForm();
         }
 
-        //Load Category And Cost Center Data
+        //Load Category And Cost Center Data.
         private void LoadListData()
         {
             availableCategory = GlobalConfig.Connection.GetCategory_All();
@@ -51,7 +51,7 @@ namespace Dashbaord
             UnderComboBox.DisplayMemberPath = "cc_name";
         }
 
-        // Validate the login Form
+        // Validate the login Form.
         private bool ValidateForm()
         {
             bool output = true;
