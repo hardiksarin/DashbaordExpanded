@@ -25,10 +25,11 @@ namespace Dashbaord
         private List<CostCenterModel> availableCostCenters = new List<CostCenterModel>();
         private List<CostCategoryModel> availableCategory = new List<CostCategoryModel>();
         private int index;
-
-        public DisplayObject(int id)
+        ICreateRequestor callingForm;
+        public DisplayObject(ICreateRequestor caller,int id)
         {
             InitializeComponent();
+            callingForm = caller;
             index = id;
             LoadListData();
             WireUpLists();
@@ -201,18 +202,22 @@ namespace Dashbaord
             {
                 case 0:
                     LedgerModel model = (LedgerModel)ListBoxItems.SelectedItem;
-                    MainWindow window = new MainWindow();
+                    /*MainWindow window = new MainWindow();
                     window.GridPrincipal.Children.Clear();
-                    window.GridPrincipal.Children.Add(new DisplayLedgers(model));
+                    window.GridPrincipal.Children.Add(new DisplayLedgers(model));*/
+                    callingForm.LedgerClicked(model);
                     break;
                 case 1:
-
+                    GroupModel groupModel = (GroupModel)ListBoxItems.SelectedItem;
+                    callingForm.GroupClicked(groupModel);
                     break;
                 case 2:
-
+                    CostCenterModel costCenterModel = (CostCenterModel)ListBoxItems.SelectedItem;
+                    callingForm.CostCenterClicked(costCenterModel);
                     break;
                 case 3:
-
+                    CostCategoryModel categoryModel = (CostCategoryModel)ListBoxItems.SelectedItem;
+                    callingForm.CategoryClicked(categoryModel);
                     break;
                 default:
                     break;

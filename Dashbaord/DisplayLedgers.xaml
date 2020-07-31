@@ -82,8 +82,8 @@
         <TextBlock  Text="Enable Intrest Calculations" Grid.Row="12" Grid.Column="3" VerticalAlignment="Center" Foreground="#FF3399FF"  FontWeight="Light" FontSize="18"></TextBlock>
         <CheckBox Name="EnableIntrestCalculations"  IsChecked="False" Grid.Column="2" Grid.Row="12" VerticalAlignment="Center" HorizontalAlignment="Center" Width="20"></CheckBox>
 
-        <Button Grid.Row="13" Margin="25,10,25,-170" Height="50" Foreground="#FFFFFFFF" Content="Submit"  FontWeight="Light" FontSize="24"></Button>
-        <Button Grid.Row="13" Grid.Column="3"  Margin="2,10,15,-170" Height="50" Foreground="#FFFFFFFF" Content="Quit"  FontWeight="Light" FontSize="24" Background="Gray"></Button>
+        <Button Grid.Row="13" Margin="25,10,25,-170" Height="50" Foreground="#FFFFFFFF" Content="Submit"  FontWeight="Light" FontSize="24" Click="Button_Click"></Button>
+        <Button Grid.Row="13" Grid.Column="3"  Margin="2,10,15,-170" Height="50" Foreground="#FFFFFFFF" Content="Quit"  FontWeight="Light" FontSize="24" Background="Gray" Click="Button_Click_1"></Button>
 
     </Grid>
 </UserControl>

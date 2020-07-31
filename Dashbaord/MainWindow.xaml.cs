@@ -1,4 +1,5 @@
 ﻿using GravitonLibrary;
+using GravitonLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Dashbaord
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window,ICreateRequestor
     {
         public MainWindow()
         {
@@ -67,19 +68,19 @@ namespace Dashbaord
             {
                 case 0:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new DisplayObject(0));
+                    GridPrincipal.Children.Add(new DisplayObject(this, 0));
                     break;
                 case 1:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new DisplayObject(1));
+                    GridPrincipal.Children.Add(new DisplayObject(this, 1));
                     break;
                 case 2:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new DisplayObject(2));
+                    GridPrincipal.Children.Add(new DisplayObject(this, 2));
                     break;
                 case 3:
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new DisplayObject(3));
+                    GridPrincipal.Children.Add(new DisplayObject(this, 3));
                     break;
                 default:
                     break;
@@ -97,6 +98,28 @@ namespace Dashbaord
         {
             GridPrincipal.Children.Clear();
             GridPrincipal.Children.Add(new ReceiptVoucher());
+        }
+
+        public void LedgerClicked(LedgerModel model)
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new DisplayLedgers(model));
+        }
+
+        public void CategoryClicked(CostCategoryModel model)
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new DisplayCategory(model));
+        }
+
+        public void GroupClicked(GroupModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CostCenterClicked(CostCenterModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }
