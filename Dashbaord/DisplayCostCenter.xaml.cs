@@ -100,15 +100,16 @@ namespace Dashbaord
         {
             if (ValidateForm())
             {
-                CostCenterModel model = new CostCenterModel();
+                CostCenterModel ccModel = new CostCenterModel();
                 CostCenterModel selectedModel = (CostCenterModel)UnderComboBox.SelectedItem;
                 CostCategoryModel selectedCategory = (CostCategoryModel)CategoryInputComboBox.SelectedItem;
-                model.cc_name = NameInputTextBox.Text;
-                model.cc_alias = AliasInputTetxBox.Text;
-                model.under_category = selectedCategory.category_id;
-                model.under_cc = selectedModel.cost_center_id;
+                ccModel.cost_center_id = model.cost_center_id;
+                ccModel.cc_name = NameInputTextBox.Text;
+                ccModel.cc_alias = AliasInputTetxBox.Text;
+                ccModel.under_category = selectedCategory.category_id;
+                ccModel.under_cc = selectedModel.cost_center_id;
 
-                GlobalConfig.Connection.UpdateCostCenter(model);
+                GlobalConfig.Connection.UpdateCostCenter(ccModel);
             }
             else
             {

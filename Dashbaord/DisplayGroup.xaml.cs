@@ -82,14 +82,14 @@ namespace Dashbaord
         {
             if (ValidateForm())
             {
-                GroupModel model = new GroupModel();
+                GroupModel groupModel = new GroupModel();
                 GroupModel selectedGroup = (GroupModel)UnderComboBox.SelectedItem;
+                groupModel.group_id = model.group_id;
+                groupModel.group_name = NameInputTextBox.Text;
+                groupModel.group_alias = AliasInputTetxBox.Text;
+                groupModel.under_group = selectedGroup.group_id;
 
-                model.group_name = NameInputTextBox.Text;
-                model.group_alias = AliasInputTetxBox.Text;
-                model.under_group = selectedGroup.group_id;
-
-                GlobalConfig.Connection.UpdateGroups(model);
+                GlobalConfig.Connection.UpdateGroups(groupModel);
             }
             else
             {

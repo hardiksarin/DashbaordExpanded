@@ -23,6 +23,7 @@ namespace Dashbaord
         List<GroupModel> availableGroups = new List<GroupModel>();
         LedgerModel ledger = new LedgerModel();
         List<string> stateList = new List<string>() { "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Puducherry" };
+        List<string> credDeb = new List<string> { "Cr", "Dr" };
         public DisplayLedgers(LedgerModel model)
         {
             InitializeComponent();
@@ -51,6 +52,9 @@ namespace Dashbaord
 
             StateValue.ItemsSource = null;
             StateValue.ItemsSource = stateList;
+
+            balanceComboBox.ItemsSource = null;
+            balanceComboBox.ItemsSource = credDeb;
         }
 
         private void WireUpForm()
@@ -69,6 +73,7 @@ namespace Dashbaord
             {
                 StateValue.Text = ledger.mailingModel.md_state;
             }
+            openingBalance.Text = ledger.ledger_opening_balance.ToString();
             MDNameValue.Text = ledger.mailingModel.md_name;
             MDCityValue.Text = ledger.mailingModel.md_city;
             MDAddressValue.Text = ledger.mailingModel.md_address;
@@ -120,9 +125,10 @@ namespace Dashbaord
                 LedgerModel model = new LedgerModel();
                 MailingDetailsModel mailingModel = new MailingDetailsModel();
                 GroupModel selectedGroup = (GroupModel)UnderGroupDropDown.SelectedItem;
+                model.lid = ledger.lid;
                 model.ledger_name = LedgerNameValue.Text;
                 model.ledger_alias = LedgerAliasValue.Text;
-                model.ledger_opening_balance = 1562.0;
+                model.ledger_opening_balance = double.Parse(openingBalance.Text);
                 model.under_group = selectedGroup.group_id;
                 if (BillBasedAccouting.IsChecked == true)
                 {

@@ -69,18 +69,19 @@ namespace Dashbaord
         {
             if (ValidateLoginForm())
             {
-                CostCategoryModel model = new CostCategoryModel();
-                model.category_name = NameInputTextBox.Text;
-                model.category_alias = AliasInputTetxBox.Text;
+                CostCategoryModel ccModel = new CostCategoryModel();
+                ccModel.category_id = model.category_id;
+                ccModel.category_name = NameInputTextBox.Text;
+                ccModel.category_alias = AliasInputTetxBox.Text;
                 if (RevenueItemCheckBox.IsChecked == true)
                 {
-                    model.revenue = true;
+                    ccModel.revenue = true;
                 }
                 else
                 {
-                    model.revenue = false;
+                    ccModel.revenue = false;
                 }
-                GlobalConfig.Connection.UpdateCategory(model);
+                GlobalConfig.Connection.UpdateCategory(ccModel);
             }
             else
             {
