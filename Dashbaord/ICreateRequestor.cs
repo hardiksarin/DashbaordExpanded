@@ -11,5 +11,6 @@ namespace Dashbaord
         void CategoryClicked(CostCategoryModel model);
         void GroupClicked(GroupModel model);
         void CostCenterClicked(CostCenterModel model);
+        void Create(int index);
     }
 }

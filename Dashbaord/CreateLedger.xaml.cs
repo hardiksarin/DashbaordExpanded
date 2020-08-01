@@ -22,6 +22,7 @@ namespace Dashbaord
     {
         List<GroupModel> availableGroups = new List<GroupModel>();
         List<string> stateList = new List<string>() { "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Puducherry" };
+        List<string> credDeb = new List<string> { "Cr", "Dr" };
         public CreateLedger()
         {
             InitializeComponent();
@@ -48,6 +49,9 @@ namespace Dashbaord
 
             StateValue.ItemsSource = null;
             StateValue.ItemsSource = stateList;
+
+            balanceComboBox.ItemsSource = null;
+            balanceComboBox.ItemsSource = credDeb;
         }
 
         //Validates the Ledger Form
@@ -78,7 +82,15 @@ namespace Dashbaord
             {
                 output = false;
             }
+            if(balanceComboBox.SelectedItem == null)
+            {
+                output = false;
+            }
             if (StateValue.SelectedItem == null)
+            {
+                output = false;
+            }
+            if(openingBalance.Text.Length == 0)
             {
                 output = false;
             }
@@ -94,7 +106,7 @@ namespace Dashbaord
                 GroupModel selectedGroup = (GroupModel)UnderGroupDropDown.SelectedItem;
                 model.ledger_name = LedgerNameValue.Text;
                 model.ledger_alias = LedgerAliasValue.Text;
-                model.ledger_opening_balance = 1562.0;
+                model.ledger_opening_balance = double.Parse(openingBalance.Text);
                 model.under_group = selectedGroup.group_id;
                 if (BillBasedAccouting.IsChecked == true)
                 {
@@ -120,6 +132,17 @@ namespace Dashbaord
                 {
                     model.enable_interest_calculations = false;
                 }
+                string balType = (string)balanceComboBox.SelectedItem;
+                if(balType == credDeb[0])
+                {
+                    model.credit_bal = model.ledger_opening_balance;
+                    model.debit_bal = 0;
+                }else if(balType == credDeb[1])
+                {
+                    model.debit_bal = model.ledger_opening_balance;
+                    model.credit_bal = 0;
+                }
+                model.current_bal = model.ledger_opening_balance;
                 mailingModel.md_name = MDNameValue.Text;
                 mailingModel.md_address = MDAddressValue.Text;
                 mailingModel.md_city = MDCityValue.Text;
@@ -128,7 +151,15 @@ namespace Dashbaord
                 mailingModel.md_pincode = MDPincodeValue.Text;
 
                 model.mailingModel = mailingModel;
-                GlobalConfig.Connection.CreateLedger(model);
+                try
+                {
+                    GlobalConfig.Connection.CreateLedger(model);
+                    MessageBox.Show("Ledger Created");
+                }catch(Exception a)
+                {
+                    MessageBox.Show(a.Message);
+                }
+                
             }
             else
             {

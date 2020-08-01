@@ -223,5 +223,26 @@ namespace Dashbaord
                     break;
             }
         }
+
+        private void PackIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            switch (index)
+            {
+                case 0:                                                 //Ledger
+                    callingForm.Create(0);
+                    break;
+                case 1:                                                 //Groups
+                    callingForm.Create(1);
+                    break;
+                case 2:                                                 //Cost Center
+                    callingForm.Create(2);
+                    break;
+                case 3:                                                 //Cost Category
+                    callingForm.Create(3);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }

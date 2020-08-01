@@ -31,8 +31,10 @@ namespace Dashbaord
         PaymentBill currentBill = new PaymentBill();
         private List<PaymentBill> transactionBill = new List<PaymentBill>();
         private List<TransactionModel> newTransactions = new List<TransactionModel>();
+        List<string> credDeb = new List<string> { "Cr", "Dr" };
         int AccountId = 0;
         int ParticularId = 0;
+        double amount = 0;
         int count = 0;
         public ReceiptVoucher()
         {
@@ -59,6 +61,9 @@ namespace Dashbaord
 
             ParticularLedgerCombobox.ItemsSource = availableLedgers;
             ParticularLedgerCombobox.DisplayMemberPath = "ledger_name";
+
+            balanceComboBox.ItemsSource = null;
+            balanceComboBox.ItemsSource = credDeb;
         }
 
         private void WireUpVoucherForm()
@@ -77,7 +82,7 @@ namespace Dashbaord
         private void AccountLedgerCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LedgerModel model = (LedgerModel)AccountLedgerCombobox.SelectedItem;
-            AccountCurrentBalanceDataValue.Text = model.ledger_opening_balance.ToString();
+            AccountCurrentBalanceDataValue.Text = model.current_bal.ToString();
             AccountId = model.lid;
         }
 
@@ -85,7 +90,7 @@ namespace Dashbaord
         {
             paymentBills.Clear();
             LedgerModel model = (LedgerModel)ParticularLedgerCombobox.SelectedItem;
-            ParticularCurrentBalanceDataValue.Text = model.ledger_opening_balance.ToString();
+            ParticularCurrentBalanceDataValue.Text = model.current_bal.ToString();
             ParticularId = model.lid;
 
             availableBills = GlobalConfig.Connection.GetBill_ById(model);
@@ -105,19 +110,24 @@ namespace Dashbaord
         {
             if (e.Key == Key.Return)
             {
-                double amount = double.Parse(AmountTextbox.Text);
-                if (ValidateForm() && amount != 0)
+                if (count < 1)
                 {
-                    recieptBills = paymentBills;
-                    BillWisePopUp form = new BillWisePopUp(this, recieptBills);
-                    form.Show();
-                }
-                else
-                {
-                    MessageBox.Show("Please Fill in the Details Properly!");
+                    count++;
+                    amount = double.Parse(AmountTextbox.Text);
+                    if (ValidateForm() && amount != 0)
+                    {
+                        recieptBills = paymentBills;
+                        BillWisePopUp form = new BillWisePopUp(this, recieptBills);
+                        form.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please Fill in the Details Properly!");
+                    }
+                    UpdateBalance();
                 }
             }
-        }
+        }  
 
         public void BillComplete(PaymentBill model)
         {
@@ -178,16 +188,20 @@ namespace Dashbaord
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
-            if (count < 2)
+            double a = double.Parse(AmountTextbox.Text);
+            if (a != 0)
             {
-                count++;
                 BillWisePopUp form = new BillWisePopUp(this, paymentBills);
                 form.Show(); 
             }
         }
 
-        private void DataGridRow_KeyUp(object sender, KeyEventArgs e)
+        /*private void DataGridRow_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+        }*/
+
+        private void SaveTransactions()
         {
             newTransactions.Clear();
             foreach (BillModel bill in availableBills)
@@ -201,9 +215,16 @@ namespace Dashbaord
                         transactionModel.transaction_amount = double.Parse(b.amount);
                         transactionModel.bill_id = bill.bill_id;
                         newTransactions.Add(transactionModel);
-                        bill.bill_done = true;
+                        if(transactionModel.transaction_amount == bill.bill_amount)
+                        {
+                            bill.bill_done = true;
+                        }
+                        else
+                        {
+                            bill.bill_amount -= transactionModel.transaction_amount;
+                        }
                     }
-                } 
+                }
             }
 
             foreach (TransactionModel model in newTransactions)
@@ -211,13 +232,150 @@ namespace Dashbaord
                 GlobalConfig.Connection.CreateTransaction(model);
                 foreach (BillModel bill in availableBills)
                 {
-                    if(bill.bill_id == model.bill_id)
+                    if (bill.bill_id == model.bill_id)
                     {
-                        GlobalConfig.Connection.UpdateBill(bill); 
+                        GlobalConfig.Connection.UpdateBill(bill);
                     }
                 }
             }
-            MessageBox.Show("Done");
+            MessageBox.Show("Transaction Complete");
+        }
+
+        private double GetBalance(LedgerModel model)
+        {
+            double current = 0;
+            if (model.credit_bal > model.debit_bal)
+            {
+                current = model.credit_bal - model.debit_bal;
+            }
+            else if (model.credit_bal < model.debit_bal)
+            {
+                current = model.debit_bal - model.credit_bal;
+            }
+            else
+            {
+                current = 0;
+            }
+            return current;
+        }
+
+        /// <summary>
+        /// Creates Receipt Voucher with Particular data, Updates Balance of both ledgers
+        /// Add transaction bills and remove done bills from bills.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            VoucherModel voucherModel = new VoucherModel();
+            ParticularModel particularModel = new ParticularModel();
+
+            //Save Receipt Voucher
+
+            //Balance Logic
+            string balType = (string)balanceComboBox.SelectedItem;
+            if (balType == credDeb[0])
+            {
+                double amnt = amount;
+                LedgerModel accountModel = (LedgerModel)AccountLedgerCombobox.SelectedItem;
+                LedgerModel particular = (LedgerModel)ParticularLedgerCombobox.SelectedItem;
+                //TODO Ledger Balance
+
+                //update Particular Ledger
+                particular.credit_bal = particular.credit_bal + amnt;
+                particular.current_bal = GetBalance(particular);
+                GlobalConfig.Connection.UpdateLedger(particular);
+
+                //update Account Ledger
+                accountModel.debit_bal = accountModel.debit_bal + amnt;
+                accountModel.current_bal = GetBalance(accountModel);
+                GlobalConfig.Connection.UpdateLedger(accountModel);
+
+            }
+            else if (balType == credDeb[1])
+            {
+                double amnt = amount;
+                LedgerModel accountModel = (LedgerModel)AccountLedgerCombobox.SelectedItem;
+                LedgerModel particular = (LedgerModel)ParticularLedgerCombobox.SelectedItem;
+                //TODO Ledger Balance
+
+                //update Particular Ledger
+                particular.debit_bal = particular.debit_bal + amnt;
+                particular.current_bal = GetBalance(particular);
+                GlobalConfig.Connection.UpdateLedger(particular);
+
+                //update Account Ledger
+                accountModel.credit_bal = accountModel.credit_bal + amnt;
+                accountModel.current_bal = GetBalance(accountModel);
+                GlobalConfig.Connection.UpdateLedger(accountModel);
+            }
+
+            //VoucherModel
+            string d = DatePicker.SelectedDate.ToString().Split(' ').First();
+            string[] dateList = d.Split('-');
+            voucherModel.v_date = $"{dateList[2]}-{dateList[1]}-{dateList[0]}";
+            if (vouchers.Count != 0)
+            {
+                voucherModel.v_number = vouchers[vouchers.Count - 1].vid + 1;
+            }
+            else
+            {
+                voucherModel.v_number = 1;
+            }
+            voucherModel.vtype = "Receipt";
+            voucherModel.account = AccountId;
+
+            //Particular Model
+            particularModel.particular_amount = double.Parse(AmountTextbox.Text);
+            particularModel.particular_name = ParticularId;
+
+            voucherModel.Particular = particularModel;
+            //Create Voucher And Particular Model.
+            voucherModel = GlobalConfig.Connection.CreateVoucher(voucherModel);
+
+            //Save Transactions
+            SaveTransactions();
+        }
+
+        private void UpdateBalance()
+        {
+            LedgerModel accountModel = (LedgerModel)AccountLedgerCombobox.SelectedItem;
+            LedgerModel particular = (LedgerModel)ParticularLedgerCombobox.SelectedItem;
+            string balType = (string)balanceComboBox.SelectedItem;
+            double amnt = amount;
+            if (balType == credDeb[0])
+            {
+                //update Particular Ledger
+                particular.credit_bal = particular.credit_bal + amnt;
+                particular.current_bal = GetBalance(particular);
+                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+
+                //update Account Ledger
+                accountModel.debit_bal = accountModel.debit_bal + amnt;
+                accountModel.current_bal = GetBalance(accountModel);
+                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+
+            }
+            else if (balType == credDeb[1])
+            {
+                //update Particular Ledger
+                particular.debit_bal = particular.debit_bal + amnt;
+                particular.current_bal = GetBalance(particular);
+                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+
+                //update Account Ledger
+                accountModel.credit_bal = accountModel.credit_bal + amnt;
+                accountModel.current_bal = GetBalance(accountModel);
+                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+            }
+        }
+
+        private void balanceComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AmountTextbox.Text.Length != 0)
+            {
+                UpdateBalance();
+            }
         }
     }
 }

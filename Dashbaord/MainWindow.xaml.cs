@@ -2,6 +2,7 @@
 using GravitonLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.DirectoryServices;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,31 @@ namespace Dashbaord
         {
             GridPrincipal.Children.Clear();
             GridPrincipal.Children.Add(new DisplayCostCenter(model));
+        }
+
+        public void Create(int index)
+        {
+            switch (index)
+            {
+                case 0:                                                 //Ledger
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new CreateLedger());
+                    break;
+                case 1:                                                 //Groups
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new CostGroupCreation());
+                    break;
+                case 2:                                                 //Cost Center
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new CostCenterCreation());
+                    break;
+                case 3:                                                 //Cost Category
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new CostCategoryCreation());
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
