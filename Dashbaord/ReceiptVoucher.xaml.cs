@@ -28,7 +28,6 @@ namespace Dashbaord
         private List<PaymentBill> paymentBills = new List<PaymentBill>();
         private List<VoucherModel> vouchers = new List<VoucherModel>();
         private List<PaymentBill> recieptBills = new List<PaymentBill>();
-        PaymentBill currentBill = new PaymentBill();
         private List<PaymentBill> transactionBill = new List<PaymentBill>();
         private List<TransactionModel> newTransactions = new List<TransactionModel>();
         List<string> credDeb = new List<string> { "Cr", "Dr" };
@@ -135,6 +134,7 @@ namespace Dashbaord
         {
             double amount = double.Parse(AmountTextbox.Text);
             double billAmount = double.Parse(model.amount);
+            PaymentBill currentBill = new PaymentBill();
             if (amount < billAmount)
             {
                 //model.amount = amount.ToString();
@@ -154,7 +154,8 @@ namespace Dashbaord
                 BillwiseDataGrid.Items.Add(currentBill);
                 transactionBill.Add(currentBill);
                 paymentBills.Remove(model);
-                AmountTextbox.Text = (amount - billAmount).ToString();
+                double temp = amount - billAmount;
+                AmountTextbox.Text = $"{temp:0.00}";
             }
             else if(amount > billAmount)
             {
@@ -162,7 +163,8 @@ namespace Dashbaord
                 BillwiseDataGrid.Items.Add(currentBill);
                 transactionBill.Add(currentBill);
                 paymentBills.Remove(model);
-                AmountTextbox.Text = (amount - billAmount).ToString();
+                double temp = amount - billAmount;
+                AmountTextbox.Text = $"{temp:0.00}";
             }
             
         }
@@ -217,7 +219,7 @@ namespace Dashbaord
                         transactionModel.transaction_amount = double.Parse(b.amount);
                         transactionModel.bill_id = bill.bill_id;
                         newTransactions.Add(transactionModel);
-                        if(transactionModel.transaction_amount == bill.bill_amount)
+                        if(Math.Floor(transactionModel.transaction_amount) == Math.Floor(bill.bill_amount))
                         {
                             bill.bill_done = true;
                         }
