@@ -23,9 +23,11 @@ namespace Dashbaord
         CostCenterModel model;
         private List<CostCategoryModel> availableCategory = new List<CostCategoryModel>();
         private List<CostCenterModel> availableCenter = new List<CostCenterModel>();
-        public DisplayCostCenter(CostCenterModel costCenterModel)
+        ICreateRequestor callingForm;
+        public DisplayCostCenter(ICreateRequestor caller ,CostCenterModel costCenterModel)
         {
             InitializeComponent();
+            callingForm = caller;
             model = costCenterModel;
             LoadListData();
             WireUpLists();
@@ -110,6 +112,10 @@ namespace Dashbaord
                 ccModel.under_cc = selectedModel.cost_center_id;
 
                 GlobalConfig.Connection.UpdateCostCenter(ccModel);
+                if (MessageBox.Show("Cost Center Updated", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    callingForm.Home(2);
+                }
             }
             else
             {
@@ -120,7 +126,7 @@ namespace Dashbaord
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(2);
         }
     }
 }

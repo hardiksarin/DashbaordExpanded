@@ -22,9 +22,11 @@ namespace Dashbaord
     {
         private List<GroupModel> availableGroups = new List<GroupModel>();
         GroupModel model;
-        public DisplayGroup(GroupModel groupModel)
+        ICreateRequestor callingForm;
+        public DisplayGroup(ICreateRequestor caller ,GroupModel groupModel)
         {
             InitializeComponent();
+            callingForm = caller;
             model = groupModel;
             LoadListData();
             WireUpLists();
@@ -90,6 +92,10 @@ namespace Dashbaord
                 groupModel.under_group = selectedGroup.group_id;
 
                 GlobalConfig.Connection.UpdateGroups(groupModel);
+                if (MessageBox.Show("Group Updated", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    callingForm.Home(1);
+                }
             }
             else
             {
@@ -100,7 +106,7 @@ namespace Dashbaord
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(1);
         }
     }
 }

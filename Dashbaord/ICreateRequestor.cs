@@ -12,5 +12,8 @@ namespace Dashbaord
         void GroupClicked(GroupModel model);
         void CostCenterClicked(CostCenterModel model);
         void Create(int index);
+        void Home(int index);
+        void NewPayment();
+        void NewReceipt();
     }
 }

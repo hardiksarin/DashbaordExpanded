@@ -23,9 +23,11 @@ namespace Dashbaord
         List<GroupModel> availableGroups = new List<GroupModel>();
         List<string> stateList = new List<string>() { "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttarakhand", "Uttar Pradesh", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", "Lakshadweep", "Puducherry" };
         List<string> credDeb = new List<string> { "Cr", "Dr" };
-        public CreateLedger()
+        ICreateRequestor callingForm;
+        public CreateLedger(ICreateRequestor caller)
         {
             InitializeComponent();
+            callingForm = caller;
             DateTime now = DateTime.Now;
             string date = now.Day.ToString();
             string month = now.Month.ToString();
@@ -154,7 +156,10 @@ namespace Dashbaord
                 try
                 {
                     GlobalConfig.Connection.CreateLedger(model);
-                    MessageBox.Show("Ledger Created");
+                    if(MessageBox.Show("Ledger Created", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                    {
+                        callingForm.Home(0);
+                    }
                 }catch(Exception a)
                 {
                     MessageBox.Show(a.Message);
@@ -170,7 +175,7 @@ namespace Dashbaord
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(0);
         }
     }
 }

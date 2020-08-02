@@ -21,9 +21,11 @@ namespace Dashbaord
     public partial class CostGroupCreation : UserControl
     {
         private List<GroupModel> availableGroups = new List<GroupModel>();
-        public CostGroupCreation()
+        ICreateRequestor callingForm;
+        public CostGroupCreation(ICreateRequestor caller)
         {
             InitializeComponent();
+            callingForm = caller;
             LoadListData();
             WireUpLists();
         }
@@ -74,6 +76,10 @@ namespace Dashbaord
                 model.under_group = selectedGroup.group_id;
 
                 GlobalConfig.Connection.CreateGroup(model);
+                if (MessageBox.Show("Group Created", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    callingForm.Home(1);
+                }
             }
             else
             {
@@ -84,7 +90,7 @@ namespace Dashbaord
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(1);
         }
     }
 }

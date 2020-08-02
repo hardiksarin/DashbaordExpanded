@@ -21,9 +21,11 @@ namespace Dashbaord
     public partial class DisplayCategory : UserControl
     {
         CostCategoryModel model;
-        public DisplayCategory(CostCategoryModel costCategoryModel)
+        ICreateRequestor callingForm;
+        public DisplayCategory(ICreateRequestor caller,CostCategoryModel costCategoryModel)
         {
             InitializeComponent();
+            callingForm = caller;
             model = costCategoryModel;
             WireUpForm();
         }
@@ -82,6 +84,10 @@ namespace Dashbaord
                     ccModel.revenue = false;
                 }
                 GlobalConfig.Connection.UpdateCategory(ccModel);
+                if (MessageBox.Show("Category Updated", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    callingForm.Home(3);
+                }
             }
             else
             {
@@ -92,7 +98,7 @@ namespace Dashbaord
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(3);
         }
     }
 }

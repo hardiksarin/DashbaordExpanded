@@ -20,9 +20,11 @@ namespace Dashbaord
     /// </summary>
     public partial class CostCategoryCreation : UserControl
     {
-        public CostCategoryCreation()
+        ICreateRequestor callingForm;
+        public CostCategoryCreation(ICreateRequestor caller)
         {
             InitializeComponent();
+            callingForm = caller;
         }
 
         // Validate the login Form
@@ -64,6 +66,10 @@ namespace Dashbaord
                     model.revenue = false;
                 }
                 GlobalConfig.Connection.CreateCategory(model);
+                if (MessageBox.Show("Catgory Created", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                {
+                    callingForm.Home(3);
+                }
             }
             else
             {
@@ -74,7 +80,7 @@ namespace Dashbaord
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                Environment.Exit(0);
+                callingForm.Home(3);
         }
     }
 }

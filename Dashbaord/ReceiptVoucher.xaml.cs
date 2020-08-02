@@ -36,9 +36,11 @@ namespace Dashbaord
         int ParticularId = 0;
         double amount = 0;
         int count = 0;
-        public ReceiptVoucher()
+        ICreateRequestor callingForm;
+        public ReceiptVoucher(ICreateRequestor caller)
         {
             InitializeComponent();
+            callingForm = caller;
             LoadListData();
             WireUpVoucherForm();
             WireUpLists();
@@ -208,7 +210,7 @@ namespace Dashbaord
             {
                 foreach (PaymentBill b in transactionBill)
                 {
-                    if (b.emi == bill.bill_name)
+                    if (b.emi == bill.bill_name && b.due_date == bill.bill_due_date.Split(' ').First())
                     {
                         TransactionModel transactionModel = new TransactionModel();
                         transactionModel.transaction_date = b.due_date;
@@ -238,7 +240,10 @@ namespace Dashbaord
                     }
                 }
             }
-            MessageBox.Show("Transaction Complete");
+            if(MessageBox.Show("Transaction Complete", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+            {
+                callingForm.NewReceipt();
+            }
         }
 
         private double GetBalance(LedgerModel model)
@@ -259,13 +264,31 @@ namespace Dashbaord
             return current;
         }
 
+        private double GetBalance(double cred, double deb)
+        {
+            double current = 0;
+            if (cred > deb)
+            {
+                current = cred - deb;
+            }
+            else if (cred < deb)
+            {
+                current = deb - cred;
+            }
+            else
+            {
+                current = 0;
+            }
+            return current;
+        }
+
         /// <summary>
         /// Creates Receipt Voucher with Particular data, Updates Balance of both ledgers
         /// Add transaction bills and remove done bills from bills.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        private void CreateButton_Click(object sender, RoutedEventArgs e)  
         {
             VoucherModel voucherModel = new VoucherModel();
             ParticularModel particularModel = new ParticularModel();
@@ -346,27 +369,28 @@ namespace Dashbaord
             if (balType == credDeb[0])
             {
                 //update Particular Ledger
-                particular.credit_bal = particular.credit_bal + amnt;
-                particular.current_bal = GetBalance(particular);
-                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+                double credBal = particular.credit_bal + amnt;
+                double debBal = particular.debit_bal;
+                double curBal = GetBalance(credBal, debBal);
+                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
 
                 //update Account Ledger
-                accountModel.debit_bal = accountModel.debit_bal + amnt;
-                accountModel.current_bal = GetBalance(accountModel);
-                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+                double adebBal = accountModel.debit_bal + amnt;
+                double acurBal = GetBalance(accountModel.credit_bal, adebBal);
+                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
 
             }
             else if (balType == credDeb[1])
             {
                 //update Particular Ledger
-                particular.debit_bal = particular.debit_bal + amnt;
-                particular.current_bal = GetBalance(particular);
-                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+                double pdebBal = particular.debit_bal + amnt;
+                double curBal = GetBalance(particular.credit_bal, pdebBal);
+                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
 
                 //update Account Ledger
-                accountModel.credit_bal = accountModel.credit_bal + amnt;
-                accountModel.current_bal = GetBalance(accountModel);
-                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+                double acredBal = accountModel.credit_bal + amnt;
+                double acurBal = GetBalance(acredBal, accountModel.debit_bal);
+                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
             }
         }
 

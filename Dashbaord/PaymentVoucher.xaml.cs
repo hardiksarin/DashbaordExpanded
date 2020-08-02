@@ -1,4 +1,4 @@
-﻿using GravitonLibrary;
+﻿ using GravitonLibrary;
 using GravitonLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -32,9 +32,11 @@ namespace Dashbaord
         int ParticularId = 0;
         double AccountBalance = 0;
         double ParticularBalance = 0;
-        public PaymentVoucher()
+        ICreateRequestor callingForm;
+        public PaymentVoucher(ICreateRequestor caller)
         {
             InitializeComponent();
+            callingForm = caller;
             LoadListData();
             WireUpVoucherForm();
             WireUpLists();
@@ -110,7 +112,8 @@ namespace Dashbaord
                     p.reference = "New";
                     p.emi = $"E0{i + 1}";
                     p.due_date = i == 0 ? date : NextMonth(date);
-                    p.amount = $"{(double)amount / num}";
+                    double temp = (double)amount / num;
+                    p.amount = $"{temp:0.00}";
                     date = p.due_date;
                     paymentBills.Add(p);
 
@@ -123,6 +126,7 @@ namespace Dashbaord
             }
         }
 
+        //Calculate Next Month
         private string NextMonth(string date)
         {
             string nextDate = date;
@@ -146,6 +150,7 @@ namespace Dashbaord
             return nextDate;
         }
 
+        //Validate Form
         private bool ValidateForm()
         {
             bool output = true;
@@ -190,6 +195,24 @@ namespace Dashbaord
             else if(model.credit_bal < model.debit_bal)
             {
                 current = model.debit_bal - model.credit_bal;
+            }
+            else
+            {
+                current = 0;
+            }
+            return current;
+        }
+
+        private double GetBalance(double cred, double deb)
+        {
+            double current = 0;
+            if (cred > deb)
+            {
+                current = cred - deb;
+            }
+            else if (cred < deb)
+            {
+                current = deb - cred;
             }
             else
             {
@@ -285,7 +308,10 @@ namespace Dashbaord
                 if (MessageBox.Show("Do you  want to save ?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
                     WireUpDatabase();
-                    MessageBox.Show("Payment Voucher Created"); 
+                    if(MessageBox.Show("Payment Voucher Created", "", MessageBoxButton.OK) == MessageBoxResult.OK)
+                    {
+                        callingForm.NewPayment();
+                    }
                 }
                 count++;
             }
@@ -300,27 +326,28 @@ namespace Dashbaord
             if (balType == credDeb[0])
             {
                 //update Particular Ledger
-                particular.credit_bal = particular.credit_bal + amnt;
-                particular.current_bal = GetBalance(particular);
-                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+                double credBal = particular.credit_bal + amnt;
+                double debBal = particular.debit_bal;
+                double curBal = GetBalance(credBal, debBal);
+                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
 
                 //update Account Ledger
-                accountModel.debit_bal = accountModel.debit_bal + amnt;
-                accountModel.current_bal = GetBalance(accountModel);
-                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+                double adebBal = accountModel.debit_bal + amnt;
+                double acurBal = GetBalance(accountModel.credit_bal, adebBal);
+                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
 
             }
             else if (balType == credDeb[1])
             {
                 //update Particular Ledger
-                particular.debit_bal = particular.debit_bal + amnt;
-                particular.current_bal = GetBalance(particular);
-                ParticularCurrentBalanceDataValue.Text = particular.current_bal.ToString();
+                double pdebBal = particular.debit_bal + amnt;
+                double curBal = GetBalance(particular.credit_bal, pdebBal);
+                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
 
                 //update Account Ledger
-                accountModel.credit_bal = accountModel.credit_bal + amnt;
-                accountModel.current_bal = GetBalance(accountModel);
-                AccountCurrentBalanceDataValue.Text = accountModel.current_bal.ToString();
+                double acredBal = accountModel.credit_bal + amnt;
+                double acurBal = GetBalance(acredBal, accountModel.debit_bal);
+                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
             }
         }
 

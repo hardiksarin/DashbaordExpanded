@@ -92,37 +92,37 @@ namespace Dashbaord
         private void PaymentVoucherCreate_Click(object sender, RoutedEventArgs e)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new PaymentVoucher());
+            GridPrincipal.Children.Add(new PaymentVoucher(this));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new ReceiptVoucher());
+            GridPrincipal.Children.Add(new ReceiptVoucher(this));
         }
 
         public void LedgerClicked(LedgerModel model)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new DisplayLedgers(model));
+            GridPrincipal.Children.Add(new DisplayLedgers(this,model));
         }
 
         public void CategoryClicked(CostCategoryModel model)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new DisplayCategory(model));
+            GridPrincipal.Children.Add(new DisplayCategory(this,model));
         }
 
         public void GroupClicked(GroupModel model)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new DisplayGroup(model));
+            GridPrincipal.Children.Add(new DisplayGroup(this,model));
         }
 
         public void CostCenterClicked(CostCenterModel model)
         {
             GridPrincipal.Children.Clear();
-            GridPrincipal.Children.Add(new DisplayCostCenter(model));
+            GridPrincipal.Children.Add(new DisplayCostCenter(this,model));
         }
 
         public void Create(int index)
@@ -131,23 +131,60 @@ namespace Dashbaord
             {
                 case 0:                                                 //Ledger
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new CreateLedger());
+                    GridPrincipal.Children.Add(new CreateLedger(this));
                     break;
                 case 1:                                                 //Groups
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new CostGroupCreation());
+                    GridPrincipal.Children.Add(new CostGroupCreation(this));
                     break;
                 case 2:                                                 //Cost Center
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new CostCenterCreation());
+                    GridPrincipal.Children.Add(new CostCenterCreation(this));
                     break;
                 case 3:                                                 //Cost Category
                     GridPrincipal.Children.Clear();
-                    GridPrincipal.Children.Add(new CostCategoryCreation());
+                    GridPrincipal.Children.Add(new CostCategoryCreation(this));
                     break;
                 default:
                     break;
             }
+        }
+
+        public void Home(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(this, 0));
+                    break;
+                case 1:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(this, 1));
+                    break;
+                case 2:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(this, 2));
+                    break;
+                case 3:
+                    GridPrincipal.Children.Clear();
+                    GridPrincipal.Children.Add(new DisplayObject(this, 3));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void NewPayment()
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new PaymentVoucher(this));
+        }
+
+        public void NewReceipt()
+        {
+            GridPrincipal.Children.Clear();
+            GridPrincipal.Children.Add(new ReceiptVoucher(this));
         }
     }
 }
