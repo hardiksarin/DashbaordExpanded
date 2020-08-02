@@ -267,7 +267,14 @@ namespace Dashbaord
             string d = DatePicker.SelectedDate.ToString().Split(' ').First();
             string[] dateList = d.Split('-');
             voucherModel.v_date = $"{dateList[2]}-{dateList[1]}-{dateList[0]}";
-            voucherModel.v_number = vouchers[vouchers.Count - 1].vid + 1; 
+            if(vouchers.Count != 0)
+            {
+                voucherModel.v_number = vouchers[vouchers.Count - 1].vid + 1;
+            }
+            else
+            {
+                voucherModel.v_number = 1;
+            }
             voucherModel.vtype = "Payment";
             voucherModel.account = AccountId;
 

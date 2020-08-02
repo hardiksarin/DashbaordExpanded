@@ -374,12 +374,12 @@ namespace Dashbaord
                 double credBal = particular.credit_bal + amnt;
                 double debBal = particular.debit_bal;
                 double curBal = GetBalance(credBal, debBal);
-                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
+                ParticularCurrentBalanceDataValue.Text = $"{curBal:0.00}";
 
                 //update Account Ledger
                 double adebBal = accountModel.debit_bal + amnt;
                 double acurBal = GetBalance(accountModel.credit_bal, adebBal);
-                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
+                AccountCurrentBalanceDataValue.Text = $"{acurBal:0.00}";
 
             }
             else if (balType == credDeb[1])
@@ -387,12 +387,12 @@ namespace Dashbaord
                 //update Particular Ledger
                 double pdebBal = particular.debit_bal + amnt;
                 double curBal = GetBalance(particular.credit_bal, pdebBal);
-                ParticularCurrentBalanceDataValue.Text = curBal.ToString();
+                ParticularCurrentBalanceDataValue.Text = $"{curBal:0.00}";
 
                 //update Account Ledger
                 double acredBal = accountModel.credit_bal + amnt;
                 double acurBal = GetBalance(acredBal, accountModel.debit_bal);
-                AccountCurrentBalanceDataValue.Text = acurBal.ToString();
+                AccountCurrentBalanceDataValue.Text = $"{acurBal:0.00}";
             }
         }
 
