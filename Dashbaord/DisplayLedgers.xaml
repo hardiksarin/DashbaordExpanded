@@ -69,8 +69,10 @@
 
 
         </GroupBox>
-        <TextBox Name ="openingBalance" Grid.Row="4" Grid.Column="4" Grid.RowSpan="5" Text="0.0" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBox>
-        <ComboBox Name="balanceComboBox" Width="50" Grid.Row="4" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,33,0" Grid.RowSpan="2"></ComboBox>
+        <TextBlock Name ="openingBalance" Grid.Row="4" Grid.Column="4" Grid.RowSpan="5" Text="0.0" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBlock>
+        <TextBlock Name ="creditBalance" Grid.Row="5" Grid.Column="4" Grid.RowSpan="5" Text="0.0" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBlock>
+        <TextBlock Name ="debitBalance" Grid.Row="6" Grid.Column="4" Grid.RowSpan="5" Text="0.0" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBlock>
+        <!--<ComboBox Name="balanceComboBox" Width="50" Grid.Row="4" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,33,0" Grid.RowSpan="2"></ComboBox>-->
         <GroupBox x:Name="LedgerOptions" Grid.Row="8" Grid.RowSpan="11"   Grid.Column="2"  Grid.ColumnSpan="5"  Header="Ledger Options"  Foreground="#FF3399FF"  Margin="10,10,0,0">
 
 
