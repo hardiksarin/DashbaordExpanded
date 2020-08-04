@@ -31,28 +31,28 @@
             <TextBlock  Margin="220,0,0,0" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="left" VerticalAlignment="Center" Name="PaymentVoucherNumberLabel" Text="No. 1" Foreground="OrangeRed" FontSize="28" FontWeight="Light"></TextBlock>
             <DatePicker Margin="10" IsTodayHighlighted="True" DisplayDate="10-12-2020" Grid.Row="0" Grid.Column="0" Width="110"  HorizontalAlignment="Right"  Name="DatePicker" Foreground="LightGray" FontSize="18" FontWeight="Light"></DatePicker>
             <Label  Grid.Row="1" Grid.Column="0" Margin="0,20,0,0"  HorizontalAlignment="Left"  Name="AccountLabel" Content="Account : " Foreground="#FF3399FF" FontSize="24" FontWeight="Light"></Label>
-            <ComboBox  Margin="120,0,0,10" Width="250" x:Name="AccountLedgerCombobox" Foreground="#3399ff" Grid.Row="1" Grid.Column="0"  BorderBrush="LightGray"  Height="30" VerticalAlignment="Bottom" HorizontalAlignment="Left" SelectionChanged="AccountLedgerCombobox_SelectionChanged"></ComboBox>
-            <Label  Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="AccountCurrentBalanceLabel" Content="Cur Balance : " FontSize="14" FontWeight="Light"></Label>
-            <TextBlock  Grid.Row="2" Grid.Column="0" Margin="80,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="AccountCurrentBalanceDataValue" Text="123,21,22 Dr "  FontSize="14" FontWeight="Light"></TextBlock>
+            <ComboBox  Margin="120,0,0,3" Width="250" x:Name="AccountLedgerCombobox" Foreground="#3399ff" Grid.Row="1" Grid.Column="0"  BorderBrush="LightGray"  Height="40" VerticalAlignment="Bottom" HorizontalAlignment="Left" SelectionChanged="AccountLedgerCombobox_SelectionChanged" FontSize="20" FontWeight="Light"></ComboBox>
+            <Label  Grid.Row="2" Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="AccountCurrentBalanceLabel" Content="Cur Balance : " FontSize="14" FontWeight="Light" Foreground="DimGray"></Label>
+            <TextBlock  Grid.Row="2" Grid.Column="0" Margin="90,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="AccountCurrentBalanceDataValue" Text="0.00"  FontSize="14" FontWeight="Light" Foreground="DimGray"></TextBlock>
             <Separator Grid.Row="2" Margin="0,40,0,0" Background="#FF3399FF"></Separator>
-            <Label Margin="10" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Top" HorizontalAlignment="Left"  Name="ParticularsLabel" Content="Particulars "  FontSize="24" FontWeight="Light"></Label>
-            <Label Margin="10" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Top" HorizontalAlignment="Right"  Name="AmountLabel" Content="Amount "  FontSize="24" FontWeight="Light"></Label>
-            <ComboBox  Margin="10"  Width="250" x:Name="ParticularLedgerCombobox" Foreground="#3399ff" Grid.Row="4" Grid.Column="0"  BorderBrush="LightGray"  Height="30" VerticalAlignment="Top" HorizontalAlignment="Left" SelectionChanged="ParticularLedgerCombobox_SelectionChanged"></ComboBox>
+            <Label Margin="0,10,10,10" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Top" HorizontalAlignment="Left"  Name="ParticularsLabel" Content="Particulars "  FontSize="24" FontWeight="Light" Foreground="#FF3399FF" ></Label>
+            <Label Margin="10" Grid.Row="3" Grid.Column="0"  VerticalAlignment="Top" HorizontalAlignment="Right"  Name="AmountLabel" Content="Amount "  FontSize="24" FontWeight="Light" Foreground="#FF3399FF"></Label>
+            <ComboBox  Margin="10"  Width="250" x:Name="ParticularLedgerCombobox" Foreground="#3399ff" Grid.Row="4" Grid.Column="0"  BorderBrush="LightGray"  Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" SelectionChanged="ParticularLedgerCombobox_SelectionChanged" FontWeight="Light" FontSize="20" ></ComboBox>
             <TextBox  Margin="10,10,80,10" KeyUp="AmountTextbox_KeyUp" Width="170" x:Name="AmountTextbox" Foreground="#3399ff" Grid.Row="4" Grid.Column="0"    Height="32" VerticalAlignment="Top" HorizontalAlignment="Right" FontSize="20" FontWeight="Light"  ></TextBox>
-            <ComboBox Name="balanceComboBox" SelectedItem="Dr" SelectionChanged="balanceComboBox_SelectionChanged" Width="50" Grid.Row="4"  Margin="10,15,10,10"  VerticalAlignment="Top" HorizontalAlignment="Right"></ComboBox>
+            <ComboBox Name="balanceComboBox" SelectedItem="Dr" SelectionChanged="balanceComboBox_SelectionChanged" Width="50" Grid.Row="4"  Margin="10,15,10,10"  VerticalAlignment="Top" HorizontalAlignment="Right" FontWeight="Light" Foreground="#FF3399FF" ></ComboBox>
 
-            <Label  Grid.Row="4" Grid.Column="0" Margin="5,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="LedgerCurrentBalanceLabel" Content="Cur Balance : "  FontSize="14" FontWeight="Light"></Label>
+            <Label  Grid.Row="4" Grid.Column="0" Margin="5,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="LedgerCurrentBalanceLabel" Content="Cur Balance : "  FontSize="14" FontWeight="Light" Foreground="DimGray" ></Label>
 
-            <TextBlock  Grid.Row="4" Grid.Column="0" Margin="90,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="ParticularCurrentBalanceDataValue" Text="0.0 Cr "  FontSize="14" FontWeight="Light"></TextBlock>
-            <Label  Grid.Row="5" Grid.Column="0" Margin="5,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="TotalNumberOfEmiLabel" Content="Number Of EMIs : "  FontSize="24" FontWeight="Light"></Label>
-            <TextBox  Margin="200,30,10,10"  Width="50" x:Name="NumberOfEmiTextbox" Foreground="#3399ff" Grid.Row="5" Grid.Column="0"    Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Light"  ></TextBox>
-            <Label  Grid.Row="5" Grid.Column="0" Margin="5,30,140,0" VerticalAlignment="Top" HorizontalAlignment="Right"  Name="StartDateLabel" Content="Start Date : "  FontSize="24" FontWeight="Light"></Label>
+            <TextBlock  Grid.Row="4" Grid.Column="0" Margin="95,55,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="ParticularCurrentBalanceDataValue" Text="0.00"  FontSize="14" FontWeight="Light" Foreground="DimGray"></TextBlock>
+            <Label  Grid.Row="5" Grid.Column="0" Margin="5,30,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="TotalNumberOfEmiLabel" Content="Number Of EMIs : "  FontSize="24" FontWeight="Light" Foreground="#FF3399FF"></Label>
+            <TextBox  Margin="200,30,10,10"  Width="50" x:Name="NumberOfEmiTextbox"  Grid.Row="5" Grid.Column="0"    Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Light"  Foreground="#FF3399FF"></TextBox>
+            <Label  Grid.Row="5" Grid.Column="0" Margin="5,30,140,0" VerticalAlignment="Top" HorizontalAlignment="Right"  Name="StartDateLabel" Content="Start Date : "  FontSize="24" FontWeight="Light" Foreground="#FF3399FF"></Label>
             <DatePicker Margin="10,20,10,0" IsTodayHighlighted="True" DisplayDate="10-12-2020" Grid.Row="5" Grid.Column="0" Width="110"  HorizontalAlignment="Right"  Name="StartDatePicker" Foreground="LightGray" FontSize="18" FontWeight="Light" SelectedDateChanged="StartDatePicker_SelectedDateChanged"></DatePicker>
             <DataGrid Height="270" ScrollViewer.CanContentScroll="True" Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "LightBlue"  
-             AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6">
+             AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" >
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header = "Refernce"  Width="*" Binding="{Binding reference}"/>
+                    <DataGridTextColumn Header = "Refernce"  Width="*" Binding="{Binding reference}" />
                     <DataGridTextColumn Header = "EMI" Width="*" Binding="{Binding emi}"/>
                     <DataGridTextColumn Header = "Due Date" Width="*" Binding="{Binding due_date}"/>
                     <DataGridTextColumn Header = "Amount" Width="*" Binding="{Binding amount}"></DataGridTextColumn>
