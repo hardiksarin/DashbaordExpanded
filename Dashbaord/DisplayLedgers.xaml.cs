@@ -140,7 +140,10 @@ namespace Dashbaord
                 model.lid = ledger.lid;
                 model.ledger_name = LedgerNameValue.Text;
                 model.ledger_alias = LedgerAliasValue.Text;
-                model.ledger_opening_balance = double.Parse(openingBalance.Text);
+                model.ledger_opening_balance = ledger.ledger_opening_balance;
+                model.current_bal = ledger.current_bal;
+                model.credit_bal = ledger.credit_bal;
+                model.debit_bal = ledger.debit_bal;
                 model.under_group = selectedGroup.group_id;
                 if (BillBasedAccouting.IsChecked == true)
                 {
