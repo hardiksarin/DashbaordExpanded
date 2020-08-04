@@ -48,7 +48,7 @@
             <TextBox  Margin="200,30,10,10"  Width="50" x:Name="NumberOfEmiTextbox" Foreground="#3399ff" Grid.Row="5" Grid.Column="0"    Height="32" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="20" FontWeight="Light"  ></TextBox>
             <Label  Grid.Row="5" Grid.Column="0" Margin="5,30,140,0" VerticalAlignment="Top" HorizontalAlignment="Right"  Name="StartDateLabel" Content="Start Date : "  FontSize="24" FontWeight="Light"></Label>
             <DatePicker Margin="10,20,10,0" IsTodayHighlighted="True" DisplayDate="10-12-2020" Grid.Row="5" Grid.Column="0" Width="110"  HorizontalAlignment="Right"  Name="StartDatePicker" Foreground="LightGray" FontSize="18" FontWeight="Light" SelectedDateChanged="StartDatePicker_SelectedDateChanged"></DatePicker>
-            <DataGrid Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "LightBlue"  
+            <DataGrid Height="270" ScrollViewer.CanContentScroll="True" Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "LightBlue"  
              AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6">
 
                 <DataGrid.Columns>

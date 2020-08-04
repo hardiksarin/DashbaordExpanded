@@ -45,7 +45,7 @@
             <Label  Grid.Row="4" Grid.Column="0" Margin="5,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="LedgerCurrentBalanceLabel" Content="Cur Balance : "  FontSize="14" FontWeight="Light"></Label>
 
             <TextBlock  Grid.Row="4" Grid.Column="0" Margin="90,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"  Name="ParticularCurrentBalanceDataValue" Text="0.0 Cr "  FontSize="14" FontWeight="Light"></TextBlock>
-            <DataGrid Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "LightBlue"  
+            <DataGrid Height="340" ScrollViewer.CanContentScroll="True" Margin="20" Name = "BillwiseDataGrid" AlternatingRowBackground = "LightBlue"  
              AlternationCount = "2" AutoGenerateColumns = "True" Grid.Row="6" IsReadOnly="True">
 
                 <DataGrid.ItemContainerStyle>
@@ -68,4 +68,5 @@
 
 
     </Grid>
+
 </UserControl>

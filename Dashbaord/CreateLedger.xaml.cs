@@ -177,5 +177,7 @@ namespace Dashbaord
             if (MessageBox.Show("Do you  want to close?", "", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 callingForm.Home(0);
         }
+
+      
     }
 }

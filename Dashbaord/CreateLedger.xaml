@@ -58,34 +58,34 @@
 
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Name="CurrentDate" Grid.Column="3" Text="Date : 24-Jun-2019"  Foreground="#FF3399FF"  FontWeight="Light" FontSize="20" Margin="82,0,0,0" />
         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Name="LedgerNameLabel" Content="Ledger Name" Foreground="Gray" FontSize="24"  FontWeight="Light"></Label>
-        <TextBox Width="270" Margin="0,5,0,0" x:Name="LedgerNameValue" Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" FontSize="22"></TextBox>
+        <TextBox Width="270" Margin="0,5,0,0" x:Name="LedgerNameValue" Grid.Row="2" Grid.Column="0" BorderBrush="LightGray" FontSize="22"  Foreground="#FF3399FF"  FontWeight="Light" ></TextBox>
         <Label Margin="20,0,0,0" Grid.Row="1" Grid.Column="1"  Name="LedgerAliasLabel" Content="Alias" Foreground="Gray" FontSize="24"  FontWeight="Light"></Label>
-        <TextBox Margin="20,0,0,0" MinWidth="200" x:Name="LedgerAliasValue"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="LightGray" FontSize="22" ></TextBox>
+        <TextBox Margin="10,5,0,0" MinWidth="200" x:Name="LedgerAliasValue"  Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="LightGray" FontSize="22" Foreground="#FF3399FF"  FontWeight="Light" ></TextBox>
         <Label Margin="5,0,0,0" Grid.Row="1" Grid.Column="3"  Name="UnderGroupLabel" Content="Under Group" Foreground="Gray" FontSize="24" FontWeight="Light"></Label>
-        <ComboBox Margin="10,11,5,0" Height="30" Background="Transparent" x:Name="UnderGroupDropDown" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="7" ></ComboBox>
+        <ComboBox Margin="10,11,5,0" Height="30" Background="Transparent" x:Name="UnderGroupDropDown" Grid.Row="2" Grid.Column="5" Grid.ColumnSpan="7" FontSize="14"  Foreground="#FF3399FF"  FontWeight="Light"></ComboBox>
         <GroupBox  x:Name="MailingAddress" Grid.Row="3" Grid.RowSpan="11"  Grid.Column="0" Grid.ColumnSpan="2" Height="500"   Header="Mailing Address" Margin="10,10,0,0" Foreground="#FF3399FF">
 
         </GroupBox>
         <Label Grid.Row="3" Grid.Column="0"  Margin="10,50,0,0" Name="NameLabel" Content="Name" Foreground="Gray" FontSize="24" FontWeight="Light"></Label>
         <TextBox 
-           HorizontalScrollBarVisibility="Hidden" Margin="10,0,0,0" x:Name="MDNameValue" Foreground="#3399ff" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray"  Height="30" VerticalAlignment="Top"  >
+           HorizontalScrollBarVisibility="Hidden" Margin="15,0,0,0" x:Name="MDNameValue" Foreground="#3399ff" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray"  Height="30" VerticalAlignment="Top"  >
         </TextBox>
         <Label Grid.Row="5" Grid.Column="0"  Name="AddressLabel" Content="Address" Foreground="Gray" FontSize="24"  Margin="10,0,0,0" FontWeight="Light"></Label>
-        <TextBox x:Name="MDAddressValue" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"  Margin="10,0,0,0" BorderBrush="LightGray"  Height="80" VerticalAlignment="Top"  ></TextBox>
+        <TextBox x:Name="MDAddressValue" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"  Margin="15,0,0,0" BorderBrush="LightGray"  Height="80" VerticalAlignment="Top"  Foreground="#FF3399FF"  FontWeight="Light" ></TextBox>
         <Label Margin="10,0,0,0" Grid.Row="7" Grid.Column="0"  Name="StateLabel" Content="State" Foreground="Gray" FontSize="24"  FontWeight="Light"></Label>
-        <ComboBox x:Name="StateValue" Foreground="#3399ff" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"  BorderBrush="LightGray"  Height="30" VerticalAlignment="Top" Margin="10,00,0,0"  ></ComboBox>
+        <ComboBox x:Name="StateValue" Foreground="#3399ff" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"  BorderBrush="LightGray"  Height="30" VerticalAlignment="Top" Margin="15,00,0,0"   FontWeight="Light"  ></ComboBox>
 
         <Label Grid.Row="9" Grid.Column="0"  Name="CityLabel" Content="City" Foreground="Gray" FontSize="24" Margin="10,0,0,0" FontWeight="Light"></Label>
-        <TextBox HorizontalScrollBarVisibility="Disabled"  x:Name="MDCityValue" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray" Height="30" VerticalAlignment="Bottom" Margin="10,0,0,0" />
+        <TextBox HorizontalScrollBarVisibility="Disabled"  x:Name="MDCityValue" Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray" Height="30" VerticalAlignment="Bottom" Margin="15,0,0,0"  Foreground="#FF3399FF"  FontWeight="Light" />
 
         <Label Grid.Row="11" Grid.Column="0"  Name="PincodeLabel" Content="Pincode" Foreground="Gray" FontSize="24" Margin="10,10,0,0" FontWeight="Light"></Label>
-        <TextBox HorizontalScrollBarVisibility="Disabled"  x:Name="MDPincodeValue" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray" Height="30" VerticalAlignment="Bottom" Margin="10,0,0,0" />
+        <TextBox HorizontalScrollBarVisibility="Disabled"  x:Name="MDPincodeValue" Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2" BorderBrush="LightGray" Height="30" VerticalAlignment="Bottom" Margin="15,0,0,0"  Foreground="#FF3399FF"  FontWeight="Light" />
         <GroupBox x:Name="LedgerBalances" Grid.Row="3" Grid.RowSpan="5"    Grid.Column="2"  Grid.ColumnSpan="5"  Header="Total Opening Balance" Margin="10,10,0,0" Foreground="#FF3399FF">
 
 
         </GroupBox>
-        <TextBox Name="openingBalance" Grid.Row="4" Grid.Column="4" Grid.RowSpan="5" Text="0.00" Foreground="#FF3399FF"  FontWeight="Light" FontSize="40" ></TextBox>
-        <ComboBox Name="balanceComboBox" Width="50" Grid.Row="4" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,22,33,0" Grid.RowSpan="2"></ComboBox>
+        <TextBox  Text="0.0" Name="openingBalance" Grid.Row="4" Grid.Column="3" Grid.RowSpan="5"  MaxLength="8" Foreground="#FF3399FF"  FontWeight="Light" FontSize="30" Margin="0,10,80,0"></TextBox>
+        <ComboBox SelectedItem="Dr" Name="balanceComboBox" Width="50" Grid.Row="4" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,10,33,0" Grid.RowSpan="2"  Foreground="#FF3399FF"  FontWeight="Light" FontSize="20"></ComboBox>
         <GroupBox x:Name="LedgerOptions" Grid.Row="8" Grid.RowSpan="11"   Grid.Column="2"  Grid.ColumnSpan="5"  Header="Ledger Options"  Foreground="#FF3399FF"  Margin="10,10,0,0">
 
 
